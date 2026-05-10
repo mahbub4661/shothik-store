@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>7% Increase Table</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f2f4f7;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    table {
+      width: 340px;
+      border-collapse: collapse;
+      background: #ffffff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+    }
+
+    th {
+      background: #111827;
+      color: #ffffff;
+      padding: 14px;
+      font-size: 16px;
+    }
+
+    td {
+      padding: 12px;
+      text-align: center;
+      border-bottom: 1px solid #e5e7eb;
+      font-size: 15px;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+  </style>
+</head>
+<body>
+
+<table id="priceTable">
+  <tr>
+    <th>Original Amount</th>
+    <th>After 7%</th>
+  </tr>
+</table>
+
+<script>
+  const amounts = [100, 200, 500, 750, 1200];
+
+  const table = document.getElementById("priceTable");
+
+  amounts.forEach(value => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${value}</td>
+      <td>${(value * 1.07).toFixed(2)}</td>
+    `;
+    table.appendChild(row);
+  });
+</script>
+
+</body>
+</html>
