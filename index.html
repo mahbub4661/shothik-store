@@ -2,386 +2,313 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Diamond Price List</title>
+<title>SHOTHiK STORE</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+
 *{
+  margin:0;
+  padding:0;
   box-sizing:border-box;
 }
 
 body{
-  margin:0;
-  padding:30px 15px;
-  background:#f3f4f6;
   font-family:Arial,Helvetica,sans-serif;
+  background:#050505;
+  color:white;
+  overflow-x:hidden;
+  animation:bgMove 10s infinite alternate;
 }
 
+/* Background Animation */
+@keyframes bgMove{
+  from{
+    background:#050505;
+  }
+  to{
+    background:#0b0f0b;
+  }
+}
+
+/* Glowing Background */
+.glow{
+  position:fixed;
+  width:300px;
+  height:300px;
+  background:#39ff5a22;
+  border-radius:50%;
+  filter:blur(80px);
+  z-index:-1;
+  animation:floatGlow 10s infinite alternate ease-in-out;
+}
+
+.glow:nth-child(1){
+  top:-50px;
+  left:-50px;
+}
+
+.glow:nth-child(2){
+  bottom:-50px;
+  right:-50px;
+  animation-delay:4s;
+}
+
+@keyframes floatGlow{
+  from{
+    transform:translate(0,0);
+  }
+  to{
+    transform:translate(50px,50px);
+  }
+}
+
+/* Main Container */
 .container{
-  max-width:1000px;
+  max-width:1100px;
   margin:auto;
+  padding:20px;
+}
+
+/* Logo Section */
+.logo-box{
+  text-align:center;
+  padding:40px 20px;
+  animation:fadeIn 1.2s ease;
+}
+
+.logo-box img{
+  width:260px;
+  max-width:90%;
+  animation:logoFloat 4s infinite ease-in-out;
+  filter:drop-shadow(0 0 20px #39ff5a88);
+}
+
+@keyframes logoFloat{
+  0%{
+    transform:translateY(0px);
+  }
+  50%{
+    transform:translateY(-10px);
+  }
+  100%{
+    transform:translateY(0px);
+  }
 }
 
 .title{
-  text-align:center;
-  font-size:32px;
+  margin-top:15px;
+  font-size:40px;
   font-weight:bold;
-  margin-bottom:25px;
-  color:#111827;
+  color:#39ff5a;
+  text-shadow:0 0 15px #39ff5a88;
+  letter-spacing:2px;
+}
+
+.subtitle{
+  margin-top:10px;
+  color:#bbbbbb;
+  font-size:16px;
+}
+
+/* Table */
+.table-box{
+  margin-top:40px;
+  background:#101010;
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 0 25px #39ff5a22;
+  animation:fadeUp 1.2s ease;
 }
 
 table{
   width:100%;
   border-collapse:collapse;
-  background:#ffffff;
-  border-radius:14px;
-  overflow:hidden;
-  box-shadow:0 10px 25px rgba(0,0,0,0.1);
 }
 
 th{
-  background:#111827;
-  color:#ffffff;
-  padding:14px;
+  background:#39ff5a;
+  color:black;
+  padding:16px;
   font-size:16px;
 }
 
 td{
-  padding:12px;
+  padding:14px;
   text-align:center;
-  border-bottom:1px solid #e5e7eb;
-  font-size:15px;
+  border-bottom:1px solid #222;
+  transition:0.3s;
 }
 
-tr:hover{
-  background:#f9fafb;
-}
-
-tr:last-child td{
-  border-bottom:none;
+tr:hover td{
+  background:#181818;
 }
 
 .category{
-  background:#e5e7eb;
+  background:#151515;
+  color:#39ff5a;
   font-weight:bold;
-  color:#111827;
+  text-transform:uppercase;
+  letter-spacing:1px;
 }
 
-@media(max-width:700px){
+/* Animations */
+@keyframes fadeIn{
+  from{
+    opacity:0;
+    transform:translateY(-20px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@keyframes fadeUp{
+  from{
+    opacity:0;
+    transform:translateY(30px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* Footer */
+.footer{
+  text-align:center;
+  margin:40px 0 20px;
+  color:#777;
+  font-size:14px;
+}
+
+/* Mobile Responsive */
+@media(max-width:768px){
 
   .title{
-    font-size:24px;
+    font-size:28px;
   }
 
-  th,
-  td{
-    padding:10px 6px;
-    font-size:13px;
+  th,td{
+    font-size:12px;
+    padding:10px 5px;
   }
 
 }
+
 </style>
 </head>
 
 <body>
 
+<!-- Background Glow -->
+<div class="glow"></div>
+<div class="glow"></div>
+
 <div class="container">
 
-<div class="title">💎 Diamond Price List 💎</div>
+<!-- Logo -->
+<div class="logo-box">
+
+  <!-- CHANGE THIS IMAGE NAME -->
+  <img src="logo.jpg" alt="SHOTHiK STORE">
+
+  <div class="title">SHOTHiK STORE</div>
+
+  <div class="subtitle">
+    Premium Diamond & Membership Shop 💎
+  </div>
+
+</div>
+
+<!-- Price Table -->
+<div class="table-box">
 
 <table>
 
 <tr>
-  <th>Diamond List</th>
-  <th>Buy Price</th>
-  <th>Sell Price</th>
-  <th>Website Price</th>
+<th>Diamond List</th>
+<th>Buy Price</th>
+<th>Sell Price</th>
+<th>Website Price</th>
 </tr>
 
-<tr>
-  <td>☞ 25 Diamond</td>
-  <td>20</td>
-  <td>21.4</td>
-  <td>22</td>
-</tr>
-
-<tr>
-  <td>☞ 50 Diamond</td>
-  <td>35</td>
-  <td>37.45</td>
-  <td>38</td>
-</tr>
-
-<tr>
-  <td>☞ 115 Diamond</td>
-  <td>75</td>
-  <td>80.25</td>
-  <td>83</td>
-</tr>
-
-<tr>
-  <td>☞ 240 Diamond</td>
-  <td>148</td>
-  <td>158.36</td>
-  <td>166</td>
-</tr>
-
-<tr>
-  <td>☞ 355 Diamond</td>
-  <td>223</td>
-  <td>238.61</td>
-  <td>249</td>
-</tr>
-
-<tr>
-  <td>☞ 505 Diamond</td>
-  <td>316</td>
-  <td>338.12</td>
-  <td>354</td>
-</tr>
-
-<tr>
-  <td>☞ 610 Diamond</td>
-  <td>375</td>
-  <td>401.25</td>
-  <td>420</td>
-</tr>
-
-<tr>
-  <td>☞ 850 Diamond</td>
-  <td>523</td>
-  <td>559.61</td>
-  <td>586</td>
-</tr>
-
-<tr>
-  <td>☞ 1090 Diamond</td>
-  <td>671</td>
-  <td>717.97</td>
-  <td>752</td>
-</tr>
-
-<tr>
-  <td>☞ 1240 Diamond</td>
-  <td>748</td>
-  <td>800.36</td>
-  <td>840</td>
-</tr>
-
-<tr>
-  <td>☞ 2530 Diamond</td>
-  <td>1500</td>
-  <td>1605</td>
-  <td>1680</td>
-</tr>
-
-<tr>
-  <td>☞ 5060 Diamond</td>
-  <td>3000</td>
-  <td>3210</td>
-  <td>3360</td>
-</tr>
-
-<tr>
-  <td>☞ 10120 Diamond</td>
-  <td>6000</td>
-  <td>6420</td>
-  <td>6720</td>
-</tr>
+<tr><td>☞ 25 Diamond</td><td>20</td><td>21.4</td><td>22</td></tr>
+<tr><td>☞ 50 Diamond</td><td>35</td><td>37.45</td><td>38</td></tr>
+<tr><td>☞ 115 Diamond</td><td>75</td><td>80.25</td><td>83</td></tr>
+<tr><td>☞ 240 Diamond</td><td>148</td><td>158.36</td><td>166</td></tr>
+<tr><td>☞ 355 Diamond</td><td>223</td><td>238.61</td><td>249</td></tr>
+<tr><td>☞ 505 Diamond</td><td>316</td><td>338.12</td><td>354</td></tr>
+<tr><td>☞ 610 Diamond</td><td>375</td><td>401.25</td><td>420</td></tr>
+<tr><td>☞ 850 Diamond</td><td>523</td><td>559.61</td><td>586</td></tr>
+<tr><td>☞ 1090 Diamond</td><td>671</td><td>717.97</td><td>752</td></tr>
+<tr><td>☞ 1240 Diamond</td><td>748</td><td>800.36</td><td>840</td></tr>
+<tr><td>☞ 2530 Diamond</td><td>1500</td><td>1605</td><td>1680</td></tr>
+<tr><td>☞ 5060 Diamond</td><td>3000</td><td>3210</td><td>3360</td></tr>
+<tr><td>☞ 10120 Diamond</td><td>6000</td><td>6420</td><td>6720</td></tr>
 
 <tr class="category">
-  <td colspan="4">Weekly Membership</td>
+<td colspan="4">Weekly Membership</td>
 </tr>
 
-<tr>
-  <td>☞ 1x Weekly</td>
-  <td>149</td>
-  <td>159.43</td>
-  <td>165</td>
-</tr>
-
-<tr>
-  <td>☞ 2x Weekly</td>
-  <td>298</td>
-  <td>318.86</td>
-  <td>330</td>
-</tr>
-
-<tr>
-  <td>☞ 3x Weekly</td>
-  <td>447</td>
-  <td>478.29</td>
-  <td>495</td>
-</tr>
-
-<tr>
-  <td>☞ 5x Weekly</td>
-  <td>745</td>
-  <td>797.15</td>
-  <td>825</td>
-</tr>
+<tr><td>☞ 1x Weekly</td><td>149</td><td>159.43</td><td>165</td></tr>
+<tr><td>☞ 2x Weekly</td><td>298</td><td>318.86</td><td>330</td></tr>
+<tr><td>☞ 3x Weekly</td><td>447</td><td>478.29</td><td>495</td></tr>
+<tr><td>☞ 5x Weekly</td><td>745</td><td>797.15</td><td>825</td></tr>
 
 <tr class="category">
-  <td colspan="4">Monthly Membership</td>
+<td colspan="4">Monthly Membership</td>
 </tr>
 
-<tr>
-  <td>☞ 1x Monthly</td>
-  <td>736</td>
-  <td>787.52</td>
-  <td>820</td>
-</tr>
-
-<tr>
-  <td>☞ 2x Monthly</td>
-  <td>1472</td>
-  <td>1575.04</td>
-  <td>1640</td>
-</tr>
+<tr><td>☞ 1x Monthly</td><td>736</td><td>787.52</td><td>820</td></tr>
+<tr><td>☞ 2x Monthly</td><td>1472</td><td>1575.04</td><td>1640</td></tr>
 
 <tr class="category">
-  <td colspan="4">Combo Packs</td>
+<td colspan="4">Combo Packs</td>
 </tr>
 
-<tr>
-  <td>☞ 1x Weekly-1x Monthly</td>
-  <td>885</td>
-  <td>946.95</td>
-  <td>985</td>
-</tr>
-
-<tr>
-  <td>☞ 4x Weekly-1x Monthly</td>
-  <td>1332</td>
-  <td>1425.24</td>
-  <td>1480</td>
-</tr>
-
-<tr>
-  <td>☞ 5x Weekly-1x Monthly</td>
-  <td>1481</td>
-  <td>1584.67</td>
-  <td>1645</td>
-</tr>
+<tr><td>☞ 1x Weekly-1x Monthly</td><td>885</td><td>946.95</td><td>985</td></tr>
+<tr><td>☞ 4x Weekly-1x Monthly</td><td>1332</td><td>1425.24</td><td>1480</td></tr>
+<tr><td>☞ 5x Weekly-1x Monthly</td><td>1481</td><td>1584.67</td><td>1645</td></tr>
 
 <tr class="category">
-  <td colspan="4">Weekly Lite</td>
+<td colspan="4">Weekly Lite</td>
 </tr>
 
-<tr>
-  <td>☞ 1x Weekly Lite</td>
-  <td>40</td>
-  <td>42.8</td>
-  <td>45</td>
-</tr>
-
-<tr>
-  <td>☞ 2x Weekly Lite</td>
-  <td>80</td>
-  <td>85.6</td>
-  <td>90</td>
-</tr>
-
-<tr>
-  <td>☞ 3x Weekly Lite</td>
-  <td>120</td>
-  <td>128.4</td>
-  <td>135</td>
-</tr>
-
-<tr>
-  <td>☞ 5x Weekly Lite</td>
-  <td>200</td>
-  <td>214</td>
-  <td>225</td>
-</tr>
+<tr><td>☞ 1x Weekly Lite</td><td>40</td><td>42.8</td><td>45</td></tr>
+<tr><td>☞ 2x Weekly Lite</td><td>80</td><td>85.6</td><td>90</td></tr>
+<tr><td>☞ 3x Weekly Lite</td><td>120</td><td>128.4</td><td>135</td></tr>
+<tr><td>☞ 5x Weekly Lite</td><td>200</td><td>214</td><td>225</td></tr>
 
 <tr class="category">
-  <td colspan="4">Level Up Pass</td>
+<td colspan="4">Level Up Pass</td>
 </tr>
 
-<tr>
-  <td>☞ Level Up-6</td>
-  <td>36</td>
-  <td>38.52</td>
-  <td>43</td>
-</tr>
-
-<tr>
-  <td>☞ Level Up-10</td>
-  <td>64</td>
-  <td>68.48</td>
-  <td>75</td>
-</tr>
-
-<tr>
-  <td>☞ Level Up-15</td>
-  <td>64</td>
-  <td>68.48</td>
-  <td>75</td>
-</tr>
-
-<tr>
-  <td>☞ Level Up-20</td>
-  <td>64</td>
-  <td>68.48</td>
-  <td>75</td>
-</tr>
-
-<tr>
-  <td>☞ Level Up-25</td>
-  <td>64</td>
-  <td>68.48</td>
-  <td>75</td>
-</tr>
-
-<tr>
-  <td>☞ Level Up-30</td>
-  <td>89</td>
-  <td>95.23</td>
-  <td>105</td>
-</tr>
-
-<tr>
-  <td>☞ Full Level Up Pass</td>
-  <td>381</td>
-  <td>407.67</td>
-  <td>448</td>
-</tr>
+<tr><td>☞ Level Up-6</td><td>36</td><td>38.52</td><td>43</td></tr>
+<tr><td>☞ Level Up-10</td><td>64</td><td>68.48</td><td>75</td></tr>
+<tr><td>☞ Level Up-15</td><td>64</td><td>68.48</td><td>75</td></tr>
+<tr><td>☞ Level Up-20</td><td>64</td><td>68.48</td><td>75</td></tr>
+<tr><td>☞ Level Up-25</td><td>64</td><td>68.48</td><td>75</td></tr>
+<tr><td>☞ Level Up-30</td><td>89</td><td>95.23</td><td>105</td></tr>
+<tr><td>☞ Full Level Up Pass</td><td>381</td><td>407.67</td><td>448</td></tr>
 
 <tr class="category">
-  <td colspan="4">Evo Access</td>
+<td colspan="4">Evo Access</td>
 </tr>
 
-<tr>
-  <td>☞ Evo 3 Day</td>
-  <td>67</td>
-  <td>71.69</td>
-  <td>80</td>
-</tr>
-
-<tr>
-  <td>☞ Evo 7 Day</td>
-  <td>100</td>
-  <td>107</td>
-  <td>120</td>
-</tr>
-
-<tr>
-  <td>☞ Evo 14 Day</td>
-  <td>200</td>
-  <td>214</td>
-  <td>240</td>
-</tr>
-
-<tr>
-  <td>☞ Evo 30 Day</td>
-  <td>297</td>
-  <td>317.79</td>
-  <td>355</td>
-</tr>
+<tr><td>☞ Evo 3 Day</td><td>67</td><td>71.69</td><td>80</td></tr>
+<tr><td>☞ Evo 7 Day</td><td>100</td><td>107</td><td>120</td></tr>
+<tr><td>☞ Evo 14 Day</td><td>200</td><td>214</td><td>240</td></tr>
+<tr><td>☞ Evo 30 Day</td><td>297</td><td>317.79</td><td>355</td></tr>
 
 </table>
+
+</div>
+
+<div class="footer">
+© 2025 SHOTHiK STORE — All Rights Reserved
+</div>
 
 </div>
 
