@@ -1,318 +1,1225 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>SHOTHiK STORE</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>SHOTHiK STORE — Premium Diamond & Membership Shop</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Google Fonts for Gaming / Cyberpunk Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@600;700;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
 
-<style>
+  <style>
+    :root {
+      --neon-green: #39ff5a;
+      --neon-green-dim: rgba(57, 255, 90, 0.16);
+      --neon-green-glow: rgba(57, 255, 90, 0.45);
+      --bg-obsidian: #040605;
+      --card-glass: rgba(13, 18, 15, 0.72);
+      --border-glass: rgba(57, 255, 90, 0.18);
+    }
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-body{
-  font-family:Arial,Helvetica,sans-serif;
-  background:#050505;
-  color:white;
-  overflow-x:hidden;
-  animation:bgMove 10s infinite alternate;
-}
+    html {
+      scroll-behavior: smooth;
+    }
 
-/* Background Animation */
-@keyframes bgMove{
-  from{
-    background:#050505;
-  }
-  to{
-    background:#0b0f0b;
-  }
-}
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-obsidian);
+      color: #f3f7f4;
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
 
-/* Glowing Background */
-.glow{
-  position:fixed;
-  width:300px;
-  height:300px;
-  background:#39ff5a22;
-  border-radius:50%;
-  filter:blur(80px);
-  z-index:-1;
-  animation:floatGlow 10s infinite alternate ease-in-out;
-}
+    /* Animated Cyberpunk Perspective Grid Background */
+    .cyber-grid {
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      background-image:
+        linear-gradient(to right, rgba(57, 255, 90, 0.045) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(57, 255, 90, 0.045) 1px, transparent 1px);
+      background-size: 46px 46px;
+      mask-image: radial-gradient(ellipse 85% 75% at 50% 35%, #000 35%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 85% 75% at 50% 35%, #000 35%, transparent 100%);
+      animation: gridDrift 22s linear infinite;
+    }
 
-.glow:nth-child(1){
-  top:-50px;
-  left:-50px;
-}
+    @keyframes gridDrift {
+      0% {
+        background-position: 0 0;
+      }
+      100% {
+        background-position: 46px 46px;
+      }
+    }
 
-.glow:nth-child(2){
-  bottom:-50px;
-  right:-50px;
-  animation-delay:4s;
-}
+    /* Interactive Canvas Particles */
+    #particle-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+    }
 
-@keyframes floatGlow{
-  from{
-    transform:translate(0,0);
-  }
-  to{
-    transform:translate(50px,50px);
-  }
-}
+    /* Ambient Floating Neon Orbs */
+    .ambient-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(110px);
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0.45;
+      animation: orbFloat 14s infinite alternate ease-in-out;
+    }
 
-/* Main Container */
-.container{
-  max-width:1100px;
-  margin:auto;
-  padding:20px;
-}
+    .orb-1 {
+      width: 360px;
+      height: 360px;
+      background: radial-gradient(circle, rgba(57, 255, 90, 0.35), transparent 70%);
+      top: -80px;
+      left: -80px;
+    }
 
-/* Logo Section */
-.logo-box{
-  text-align:center;
-  padding:40px 20px;
-  animation:fadeIn 1.2s ease;
-}
+    .orb-2 {
+      width: 420px;
+      height: 420px;
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.25), transparent 70%);
+      bottom: -100px;
+      right: -90px;
+      animation-delay: -5s;
+    }
 
-.logo-box img{
-  width:260px;
-  max-width:90%;
-  animation:logoFloat 4s infinite ease-in-out;
-  filter:drop-shadow(0 0 20px #39ff5a88);
-}
+    .orb-3 {
+      width: 260px;
+      height: 260px;
+      background: radial-gradient(circle, rgba(57, 255, 90, 0.18), transparent 70%);
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation-duration: 18s;
+    }
 
-@keyframes logoFloat{
-  0%{
-    transform:translateY(0px);
-  }
-  50%{
-    transform:translateY(-10px);
-  }
-  100%{
-    transform:translateY(0px);
-  }
-}
+    @keyframes orbFloat {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+      100% {
+        transform: translate(45px, 35px) scale(1.12);
+      }
+    }
 
-.title{
-  margin-top:15px;
-  font-size:40px;
-  font-weight:bold;
-  color:#39ff5a;
-  text-shadow:0 0 15px #39ff5a88;
-  letter-spacing:2px;
-}
+    /* Logo Showcase & Rotating Energy Ring */
+    .logo-ring-wrapper {
+      position: relative;
+      width: 196px;
+      height: 196px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: logoHover 4.5s ease-in-out infinite;
+    }
 
-.subtitle{
-  margin-top:10px;
-  color:#bbbbbb;
-  font-size:16px;
-}
+    @keyframes logoHover {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-9px);
+      }
+    }
 
-/* Table */
-.table-box{
-  margin-top:40px;
-  background:#101010;
-  border-radius:20px;
-  overflow:hidden;
-  box-shadow:0 0 25px #39ff5a22;
-  animation:fadeUp 1.2s ease;
-}
+    .energy-ring-outer {
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      border: 2px dashed rgba(57, 255, 90, 0.55);
+      box-shadow: 0 0 25px rgba(57, 255, 90, 0.22), inset 0 0 18px rgba(57, 255, 90, 0.15);
+      animation: spinClockwise 16s linear infinite;
+    }
 
-table{
-  width:100%;
-  border-collapse:collapse;
-}
+    .energy-ring-inner {
+      position: absolute;
+      inset: 2px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      border-top-color: #39ff5a;
+      border-bottom-color: #39ff5a;
+      filter: drop-shadow(0 0 8px #39ff5a);
+      animation: spinCounterClockwise 7s linear infinite;
+    }
 
-th{
-  background:#39ff5a;
-  color:black;
-  padding:16px;
-  font-size:16px;
-}
+    @keyframes spinClockwise {
+      to {
+        transform: rotate(360deg);
+      }
+    }
 
-td{
-  padding:14px;
-  text-align:center;
-  border-bottom:1px solid #222;
-  transition:0.3s;
-}
+    @keyframes spinCounterClockwise {
+      to {
+        transform: rotate(-360deg);
+      }
+    }
 
-tr:hover td{
-  background:#181818;
-}
+    .logo-frame {
+      width: 172px;
+      height: 172px;
+      border-radius: 50%;
+      overflow: hidden;
+      background: radial-gradient(circle at 30% 30%, #142419, #060a07);
+      border: 2px solid rgba(57, 255, 90, 0.5);
+      box-shadow: 0 0 35px rgba(57, 255, 90, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+    }
 
-.category{
-  background:#151515;
-  color:#39ff5a;
-  font-weight:bold;
-  text-transform:uppercase;
-  letter-spacing:1px;
-}
+    .logo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
 
-/* Animations */
-@keyframes fadeIn{
-  from{
-    opacity:0;
-    transform:translateY(-20px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
-}
+    /* Fallback Badge when local logo.jpg is absent in preview */
+    .logo-fallback {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 12px;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(57, 255, 90, 0.18) 0%, rgba(5, 10, 7, 0.96) 75%);
+    }
 
-@keyframes fadeUp{
-  from{
-    opacity:0;
-    transform:translateY(30px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
-}
+    /* Shimmer & Subtle Glitch Cyberpunk Title */
+    .brand-title {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      background: linear-gradient(90deg, #ffffff 0%, #39ff5a 35%, #b6ffc2 50%, #39ff5a 65%, #ffffff 100%);
+      background-size: 220% auto;
+      color: transparent;
+      -webkit-background-clip: text;
+      background-clip: text;
+      animation: titleShimmer 4.5s linear infinite;
+      text-shadow: 0 0 28px rgba(57, 255, 90, 0.35);
+      position: relative;
+    }
 
-/* Footer */
-.footer{
-  text-align:center;
-  margin:40px 0 20px;
-  color:#777;
-  font-size:14px;
-}
+    @keyframes titleShimmer {
+      0% {
+        background-position: 200% center;
+      }
+      100% {
+        background-position: -200% center;
+      }
+    }
 
-/* Mobile Responsive */
-@media(max-width:768px){
+    /* Status Pill Pulse */
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: #39ff5a;
+      box-shadow: 0 0 10px #39ff5a;
+      animation: pulseDot 1.6s infinite ease-in-out;
+    }
 
-  .title{
-    font-size:28px;
-  }
+    @keyframes pulseDot {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.45);
+        opacity: 0.55;
+      }
+    }
 
-  th,td{
-    font-size:12px;
-    padding:10px 5px;
-  }
+    /* Glassmorphic Controls & Category Filter Pills */
+    .glass-panel {
+      background: var(--card-glass);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-glass);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.65), 0 0 25px rgba(57, 255, 90, 0.06);
+    }
 
-}
+    .filter-pill {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+      border: 1px solid rgba(57, 255, 90, 0.2);
+      background: rgba(15, 22, 18, 0.75);
+      color: #b7c9bd;
+      white-space: nowrap;
+    }
 
-</style>
+    .filter-pill:hover {
+      border-color: rgba(57, 255, 90, 0.65);
+      color: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(57, 255, 90, 0.18);
+    }
+
+    .filter-pill.active {
+      background: linear-gradient(135deg, #39ff5a 0%, #19c93c 100%);
+      color: #030804;
+      border-color: #39ff5a;
+      box-shadow: 0 0 20px rgba(57, 255, 90, 0.45);
+    }
+
+    /* Hide scrollbar for horizontal filter ribbon on mobile */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Table Spotlight Wrapper */
+    .table-spotlight-container {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .table-spotlight-container::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(
+        420px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(57, 255, 90, 0.11),
+        transparent 65%
+      );
+      z-index: 1;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+
+    .table-spotlight-container:hover::before {
+      opacity: 1;
+    }
+
+    /* Price Table Styling */
+    .price-table {
+      width: 100%;
+      border-collapse: collapse;
+      position: relative;
+      z-index: 2;
+    }
+
+    .price-table thead th {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: linear-gradient(180deg, rgba(16, 32, 21, 0.96) 0%, rgba(10, 20, 14, 0.96) 100%);
+      backdrop-filter: blur(12px);
+      color: #39ff5a;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 16px 14px;
+      border-bottom: 2px solid rgba(57, 255, 90, 0.45);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      white-space: nowrap;
+    }
+
+    /* Category Divider Row */
+    tr.category-row td {
+      background: linear-gradient(90deg, rgba(57, 255, 90, 0.16) 0%, rgba(20, 35, 25, 0.75) 50%, rgba(57, 255, 90, 0.16) 100%);
+      color: #39ff5a;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 13px 16px;
+      text-align: center;
+      border-top: 1px solid rgba(57, 255, 90, 0.3);
+      border-bottom: 1px solid rgba(57, 255, 90, 0.3);
+      text-shadow: 0 0 12px rgba(57, 255, 90, 0.45);
+    }
+
+    /* Item Data Row */
+    tr.item-row {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.055);
+      transition: background-color 0.25s ease, transform 0.25s ease;
+      cursor: pointer;
+      position: relative;
+    }
+
+    tr.item-row td {
+      padding: 14px 12px;
+      text-align: center;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      transition: all 0.25s ease;
+    }
+
+    tr.item-row td:first-child {
+      text-align: left;
+      padding-left: 22px;
+      font-weight: 700;
+      color: #f0f7f2;
+      position: relative;
+    }
+
+    /* Sliding Left Neon Indicator on Hover */
+    tr.item-row td:first-child::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 14%;
+      bottom: 14%;
+      width: 4px;
+      border-radius: 0 4px 4px 0;
+      background: #39ff5a;
+      box-shadow: 0 0 12px #39ff5a;
+      transform: scaleY(0);
+      transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    tr.item-row:hover {
+      background-color: rgba(57, 255, 90, 0.08);
+    }
+
+    tr.item-row:hover td:first-child {
+      color: #39ff5a;
+      transform: translateX(4px);
+    }
+
+    tr.item-row:hover td:first-child::before {
+      transform: scaleY(1);
+    }
+
+    /* Discount Pill Badge */
+    .discount-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 58px;
+      padding: 3px 12px;
+      border-radius: 999px;
+      background: rgba(57, 255, 90, 0.14);
+      border: 1px solid rgba(57, 255, 90, 0.45);
+      color: #39ff5a;
+      font-weight: 700;
+      box-shadow: 0 0 12px rgba(57, 255, 90, 0.18);
+      transition: all 0.25s ease;
+    }
+
+    tr.item-row:hover .discount-badge {
+      background: #39ff5a;
+      color: #030804;
+      box-shadow: 0 0 18px rgba(57, 255, 90, 0.65);
+    }
+
+    /* Strikethrough Sell Price when Discount is lower */
+    .sell-strike {
+      text-decoration: line-through;
+      color: #7c8b81;
+      font-size: 0.95rem;
+    }
+
+    /* Scroll Reveal Animation */
+    .reveal-row {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal-row.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Modal Backdrop & Entrance */
+    .modal-backdrop {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.28s ease;
+    }
+
+    .modal-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-card {
+      transform: scale(0.92) translateY(16px);
+      transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .modal-backdrop.open .modal-card {
+      transform: scale(1) translateY(0);
+    }
+
+    /* Responsive Mobile Adjustments */
+    @media (max-width: 640px) {
+      .logo-ring-wrapper {
+        width: 150px;
+        height: 150px;
+      }
+      .logo-frame {
+        width: 132px;
+        height: 132px;
+      }
+      .price-table thead th {
+        font-size: 0.68rem;
+        padding: 13px 8px;
+      }
+      tr.item-row td {
+        font-size: 0.95rem;
+        padding: 12px 8px;
+      }
+      tr.item-row td:first-child {
+        padding-left: 14px;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<!-- Background Glow -->
-<div class="glow"></div>
-<div class="glow"></div>
+  <!-- Animated Cyberpunk Grid & Floating Neon Orbs -->
+  <div class="cyber-grid"></div>
+  <canvas id="particle-canvas"></canvas>
+  <div class="ambient-orb orb-1"></div>
+  <div class="ambient-orb orb-2"></div>
+  <div class="ambient-orb orb-3"></div>
 
-<div class="container">
+  <!-- Main Container -->
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12 relative z-10">
 
-<!-- Logo -->
-<div class="logo-box">
+    <!-- Header & Logo Showcase -->
+    <header class="text-center mb-10">
+      <!-- Live Status Badge -->
+      <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full glass-panel mb-6">
+        <span class="status-dot"></span>
+        <span class="text-xs sm:text-sm font-semibold tracking-wider text-[#39ff5a] uppercase" style="font-family: 'Rajdhani', sans-serif;">
+          ⚡ INSTANT TOP-UP • 24/7 ACTIVE
+        </span>
+      </div>
 
-  <!-- CHANGE THIS IMAGE NAME -->
-  <img src="logo.jpg" alt="SHOTHiK STORE">
+      <!-- Logo with Rotating Energy Ring -->
+      <div class="logo-ring-wrapper mb-5">
+        <div class="energy-ring-outer"></div>
+        <div class="energy-ring-inner"></div>
+        <div class="logo-frame">
+          <!-- Preserving exact src="logo.jpg" with clean fallback if local file is missing -->
+          <img
+            src="logo.jpg"
+            alt="SHOTHiK STORE"
+            onerror="this.style.display='none'; document.getElementById('logoFallback').style.display='flex';"
+          >
+          <div id="logoFallback" class="logo-fallback">
+            <svg class="w-12 h-12 text-[#39ff5a] mb-1 drop-shadow-[0_0_10px_rgba(57,255,90,0.8)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M6 3h12l4 6-10 13L2 9z"/>
+              <path d="M11 3 8 9l4 13 4-13-3-6"/>
+              <path d="M2 9h20"/>
+            </svg>
+            <span class="text-[11px] font-bold tracking-widest text-[#39ff5a]" style="font-family:'Orbitron',sans-serif;">SHOTHiK</span>
+          </div>
+        </div>
+      </div>
 
-  <div class="title">SHOTHiK STORE</div>
+      <!-- Cyberpunk Title & Subtitle -->
+      <h1 class="brand-title text-3xl sm:text-5xl md:text-6xl uppercase mb-3">
+        SHOTHiK STORE
+      </h1>
+      <p class="text-sm sm:text-base md:text-lg text-gray-300/90 max-w-xl mx-auto font-medium">
+        Premium Diamond &amp; Membership Shop 💎 — Fast, Trusted &amp; Best Rates
+      </p>
+    </header>
 
-  <div class="subtitle">
-    Premium Diamond & Membership Shop 💎
+    <!-- Interactive Filter & Search Controls -->
+    <section class="glass-panel rounded-2xl p-4 sm:p-5 mb-6">
+      <div class="flex flex-col md:flex-row gap-4 items-stretch md:items-center justify-between">
+        <!-- Search Input -->
+        <div class="relative flex-1">
+          <span class="absolute inset-y-0 left-3.5 flex items-center text-[#39ff5a]/80 pointer-events-none">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.3-4.3"></path>
+            </svg>
+          </span>
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Search diamond pack, membership, price..."
+            class="w-full pl-10 pr-9 py-2.5 rounded-xl bg-[#070b08]/90 border border-[#39ff5a]/25 text-sm text-white placeholder-gray-400 focus:outline-none focus:border-[#39ff5a] focus:ring-2 focus:ring-[#39ff5a]/25 transition"
+          >
+          <button
+            id="clearSearchBtn"
+            type="button"
+            aria-label="Clear search"
+            class="hidden absolute inset-y-0 right-3 items-center text-gray-400 hover:text-[#39ff5a] text-sm font-bold"
+          >
+            ✕
+          </button>
+        </div>
+
+        <!-- Quick Hint -->
+        <div class="text-xs text-gray-400 flex items-center justify-between md:justify-end gap-3 px-1">
+          <span>💡 Tap any package row to copy / quick-order</span>
+          <span id="visibleCountBadge" class="px-2.5 py-1 rounded-lg bg-[#39ff5a]/10 border border-[#39ff5a]/30 text-[#39ff5a] font-semibold">
+            35 Packs
+          </span>
+        </div>
+      </div>
+
+      <!-- Category Filter Pills -->
+      <div id="categoryTabs" class="flex items-center gap-2 overflow-x-auto no-scrollbar pt-4 mt-4 border-t border-white/10">
+        <button type="button" class="filter-pill active px-4 py-2 rounded-xl text-sm" data-category="all">All Packs</button>
+        <button type="button" class="filter-pill px-4 py-2 rounded-xl text-sm" data-category="diamonds">💎 Diamonds</button>
+        <button type="button" class="filter-pill px-4 py-2 rounded-xl text-sm" data-category="weekly">Weekly</button>
+        <button type="button" class="filter-pill px-4 py-2 rounded-xl text-sm" data-category="monthly">Monthly</button>
+        <button type="button" class="filter-pill px-4 py-2 rounded-xl text-sm" data-category="combo">Combo Packs</button>
+        <button type="button" class="filter-pill px-4 py-2 rounded-xl text-sm" data-category="weekly-lite">Weekly Lite</button>
+        <button type="button" class="filter-pill px-4 py-2 rounded-xl text-sm" data-category="level-up">Level Up Pass</button>
+        <button type="button" class="filter-pill px-4 py-2 rounded-xl text-sm" data-category="evo">Evo Access</button>
+      </div>
+    </section>
+
+    <!-- Price Table Container -->
+    <main class="glass-panel table-spotlight-container" id="tableSpotlight">
+      <div class="overflow-x-auto">
+        <table class="price-table" id="priceTable">
+          <thead>
+            <tr>
+              <th class="text-left pl-5 sm:pl-6">Diamond List</th>
+              <th>UC/SHELL</th>
+              <th>Buy Price</th>
+              <th>Sell Price</th>
+              <th>Discount Price</th>
+            </tr>
+          </thead>
+
+          <tbody id="priceTableBody">
+            <!-- Diamond List -->
+            <tr class="item-row reveal-row" data-cat="diamonds">
+              <td>☞ 25 Diamond</td>
+              <td>20</td>
+              <td>20</td>
+              <td>20</td>
+              <td><span class="discount-badge">20</span></td>
+            </tr>
+            <tr class="item-row reveal-row" data-cat="diamonds">
+              <td>☞ 50 Diamond</td>
+              <td>36</td>
+              <td>35</td>
+              <td>35</td>
+              <td><span class="discount-badge">35</span></td>
+            </tr>
+            <tr class="item-row reveal-row" data-cat="diamonds">
+              <td>☞ 115 Diamond</td>
+              <td>80</td>
+              <td>75</td>
+              <td class="sell-strike">79</td>
+              <td><span class="discount-badge">78</span></td>
+            </tr>
+            <tr class="item-row reveal-row" data-cat="diamonds">
+              <td>☞ 240 Diamond</td>
+              <td>160</td>
+              <td>150</td>
+              <td class="sell-strike">158</td>
+              <td><span class="discount-badge">155</span></td>
+            </tr>
+            <tr class="item-row reveal-row" data-cat="diamonds">
+              <td>☞ 355 Diamond</td>
+              <td>160, 80</td>
+              <td>225</td>
+              <td class="sell-strike">237</td>
+              <td><span class="discount-badge">232</span></td>
+            </tr>
+            <tr class="item-row reveal-row" data-cat="diamonds">
+              <td>☞ 505 Diamond</td>
+              <td>160, 160, 20</td>
+              <td>320</td>
+              <td class="sell-strike">336</td>
+              <td><span class="discount-badge">330</span></td>
+            </tr>
+            <tr class="item-row reveal-row" data-cat="diamonds">
+              <td>☞ 610 Diamond</td>
+              <td>405</td>
+              <td>380</td>
+              <td class="sell-strike">400</td>
+              <td><span class="discount-badge">395</span></td>
+            </tr>
+            <tr class="item-row reveal-row" data-cat="diamonds">
+              <td>☞ 850 Diamond</td>
+              <td>405, 160</td>
+              <td>530</td>
+              <td class="sell-strike">558</td>
+              <td><span class="discount-badge">552</span></td>
+            </tr>
+            <tr class="item-row reveal-row" data-cat="diamonds">
+              <td>☞ 1090 Diamond</td>
+              <td>405, 160, 160</td>
+              <td>680</td>
+              <td class="sell-strike">716</td>
+              <td><span class="discount-badge">710</span></td>
+            </tr>
+            <tr class="item-row reveal-row" data-cat="diamonds">
+              <td>☞ 1240 Diamond</td>
+              <td>810</td>
+              <td>758</td>
+              <td class="sell-strike">800</td>
+              <td><span class="discount-badge">790</span></td>
+            </tr>
+            <tr class="item-row reveal-row" data-cat="diamonds">
+              <td>☞ 2090 Diamond</td>
+              <td>810, 405, 160</td>
+              <td>1288</td>
+              <td class="sell-strike">1358</td>
+              <td><span class="discount-badge">1350</span></td>
+            </tr>
+            <tr class="item-row reveal-row" data-cat="diamonds">
+              <td>☞ 2530 Diamond</td>
+              <td>1625</td>
+              <td>1521</td>
+              <td class="sell-strike">1610</td>
+              <td><span class="discount-badge">1595</span></td>
+            </tr>
+            <tr class="item-row reveal-row" data-cat="diamonds">
+              <td>☞ 5060 Diamond</td>
+              <td>1625, 1625</td>
+              <td>3042</td>
+              <td class="sell-strike">3220</td>
+              <td><span class="discount-badge">3190</span></td>
+            </tr>
+            <tr class="item-row reveal-row" data-cat="diamonds">
+              <td>☞ 10120 Diamond</td>
+              <td>1625, 1625, 1625, 1625</td>
+              <td>6084</td>
+              <td class="sell-strike">6440</td>
+              <td><span class="discount-badge">6390</span></td>
+            </tr>
+
+            <!-- Weekly Membership -->
+            <tr class="category-row reveal-row" data-cat-header="weekly">
+              <td colspan="5">Weekly Membership</td>
+            </tr>
+            <tr class="item-row reveal-row" data-cat="weekly">
+              <td>☞ 1x Weekly</td>
+              <td>161</td>
+              <td>151</td>
+              <td class="sell-strike">158</td>
+              <td><span class="discount-badge">156</span></td>
+            </tr>
+            <tr class="item-row reveal-row" data-cat="weekly">
+              <td>☞ 2x Weekly</td>
+              <td>161, 161</td>
+              <td>302</td>
+              <td class="sell-strike">316</td>
+              <td><span class="discount-badge">312</span></td>
+            </tr>
+            <tr class="item-row reveal-row" data-cat="weekly">
+              <td>☞ 3x Weekly</td>
+              <td>161, 161, 161</td>
+              <td>453</td>
+              <td class="sell-strike">474</td>
+              <td><span class="discount-badge">468</span></td>
+            </tr>
+            <tr class="item-row reveal-row" data-cat="weekly">
+              <td>☞ 5x Weekly</td>
+              <td>161, 161, 161, 161, 161</td>
+              <td>755</td>
+              <td class="sell-strike">790</td>
+              <td><span class="discount-badge">780</span></td>
+            </tr>
+
+            <!-- Monthly Membership -->
+            <tr class="category-row reveal-row" data-cat-header="monthly">
+              <td colspan="5">Monthly Membership</td>
+            </tr>
+            <tr class="item-row reveal-row" data-cat="monthly">
+              <td>☞ 1x Monthly</td>
+              <td>800</td>
+              <td>749</td>
+              <td class="sell-strike">790</td>
+              <td><span class="discount-badge">775</span></td>
+            </tr>
+            <tr class="item-row reveal-row" data-cat="monthly">
+              <td>☞ 2x Monthly</td>
+              <td>800, 800</td>
+              <td>1498</td>
+              <td class="sell-strike">1580</td>
+              <td><span class="discount-badge">1550</span></td>
+            </tr>
+
+            <!-- Combo Packs -->
+            <tr class="category-row reveal-row" data-cat-header="combo">
+              <td colspan="5">Combo Packs</td>
+            </tr>
+            <tr class="item-row reveal-row" data-cat="combo">
+              <td>☞ 1x Weekly-1x Monthly</td>
+              <td>161, 800</td>
+              <td>900</td>
+              <td class="sell-strike">948</td>
+              <td><span class="discount-badge">932</span></td>
+            </tr>
+            <tr class="item-row reveal-row" data-cat="combo">
+              <td>☞ 4x Weekly-1x Monthly</td>
+              <td>161, 161, 161, 161, 800</td>
+              <td>1353</td>
+              <td class="sell-strike">1422</td>
+              <td><span class="discount-badge">1400</span></td>
+            </tr>
+            <tr class="item-row reveal-row" data-cat="combo">
+              <td>☞ 5x Weekly-1x Monthly</td>
+              <td>161, 161, 161, 161, 161, 800</td>
+              <td>1504</td>
+              <td class="sell-strike">1580</td>
+              <td><span class="discount-badge">1555</span></td>
+            </tr>
+
+            <!-- Weekly Lite -->
+            <tr class="category-row reveal-row" data-cat-header="weekly-lite">
+              <td colspan="5">Weekly Lite</td>
+            </tr>
+            <tr class="item-row reveal-row" data-cat="weekly-lite">
+              <td>☞ 1x Weekly Lite</td>
+              <td>18</td>
+              <td>39</td>
+              <td class="sell-strike">42</td>
+              <td><span class="discount-badge">41</span></td>
+            </tr>
+            <tr class="item-row reveal-row" data-cat="weekly-lite">
+              <td>☞ 2x Weekly Lite</td>
+              <td>36</td>
+              <td>78</td>
+              <td>82</td>
+              <td><span class="discount-badge">82</span></td>
+            </tr>
+            <tr class="item-row reveal-row" data-cat="weekly-lite">
+              <td>☞ 3x Weekly Lite</td>
+              <td>54</td>
+              <td>117</td>
+              <td>125</td>
+              <td><span class="discount-badge">125</span></td>
+            </tr>
+            <tr class="item-row reveal-row" data-cat="weekly-lite">
+              <td>☞ 5x Weekly Lite</td>
+              <td>90</td>
+              <td>195</td>
+              <td>205</td>
+              <td><span class="discount-badge">205</span></td>
+            </tr>
+
+            <!-- Level Up Pass -->
+            <tr class="category-row reveal-row" data-cat-header="level-up">
+              <td colspan="5">Level Up Pass</td>
+            </tr>
+            <tr class="item-row reveal-row" data-cat="level-up">
+              <td>☞ Level Up-6</td>
+              <td>16</td>
+              <td>36</td>
+              <td>40</td>
+              <td><span class="discount-badge">40</span></td>
+            </tr>
+            <tr class="item-row reveal-row" data-cat="level-up">
+              <td>☞ Level Up-10</td>
+              <td>28</td>
+              <td>64</td>
+              <td class="sell-strike">75</td>
+              <td><span class="discount-badge">72</span></td>
+            </tr>
+            <tr class="item-row reveal-row" data-cat="level-up">
+              <td>☞ Level Up-15</td>
+              <td>28</td>
+              <td>64</td>
+              <td class="sell-strike">75</td>
+              <td><span class="discount-badge">72</span></td>
+            </tr>
+            <tr class="item-row reveal-row" data-cat="level-up">
+              <td>☞ Level Up-20</td>
+              <td>28</td>
+              <td>64</td>
+              <td class="sell-strike">75</td>
+              <td><span class="discount-badge">72</span></td>
+            </tr>
+            <tr class="item-row reveal-row" data-cat="level-up">
+              <td>☞ Level Up-25</td>
+              <td>28</td>
+              <td>64</td>
+              <td class="sell-strike">75</td>
+              <td><span class="discount-badge">72</span></td>
+            </tr>
+            <tr class="item-row reveal-row" data-cat="level-up">
+              <td>☞ Level Up-30</td>
+              <td>40</td>
+              <td>89</td>
+              <td class="sell-strike">105</td>
+              <td><span class="discount-badge">100</span></td>
+            </tr>
+            <tr class="item-row reveal-row" data-cat="level-up">
+              <td>☞ Full Level Up Pass</td>
+              <td>168</td>
+              <td>381</td>
+              <td class="sell-strike">445</td>
+              <td><span class="discount-badge">438</span></td>
+            </tr>
+
+            <!-- Evo Access -->
+            <tr class="category-row reveal-row" data-cat-header="evo">
+              <td colspan="5">Evo Access</td>
+            </tr>
+            <tr class="item-row reveal-row" data-cat="evo">
+              <td>☞ Evo 3 Day</td>
+              <td>—</td>
+              <td>00</td>
+              <td>00</td>
+              <td><span class="discount-badge">00</span></td>
+            </tr>
+            <tr class="item-row reveal-row" data-cat="evo">
+              <td>☞ Evo 7 Day</td>
+              <td>—</td>
+              <td>00</td>
+              <td>00</td>
+              <td><span class="discount-badge">00</span></td>
+            </tr>
+            <tr class="item-row reveal-row" data-cat="evo">
+              <td>☞ Evo 14 Day</td>
+              <td>—</td>
+              <td>00</td>
+              <td>00</td>
+              <td><span class="discount-badge">00</span></td>
+            </tr>
+            <tr class="item-row reveal-row" data-cat="evo">
+              <td>☞ Evo 30 Day</td>
+              <td>—</td>
+              <td>00</td>
+              <td>00</td>
+              <td><span class="discount-badge">00</span></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Empty Search State -->
+        <div id="emptyState" class="hidden py-14 px-4 text-center">
+          <p class="text-lg font-semibold text-gray-300 mb-1">No matching packages found</p>
+          <p class="text-sm text-gray-500">Try searching for another diamond amount or reset your category filter.</p>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center mt-12 mb-4">
+      <div class="inline-block px-6 py-3 rounded-2xl glass-panel">
+        <p class="text-xs sm:text-sm text-gray-400 tracking-wide">
+          © 2025 <span class="text-[#39ff5a] font-semibold">SHOTHiK STORE</span> — All Rights Reserved
+        </p>
+      </div>
+    </footer>
+
   </div>
 
-</div>
+  <!-- Quick Copy / Order Details Modal -->
+  <div id="packageModal" class="modal-backdrop fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm">
+    <div class="modal-card glass-panel w-full max-w-md rounded-2xl p-6 border border-[#39ff5a]/40 shadow-[0_0_40px_rgba(57,255,90,0.22)]">
+      <div class="flex items-start justify-between gap-3 mb-4">
+        <div>
+          <span class="text-[11px] font-bold uppercase tracking-widest text-[#39ff5a]" style="font-family:'Orbitron',sans-serif;">Package Details</span>
+          <h3 id="modalTitle" class="text-xl font-bold text-white mt-0.5">Package Name</h3>
+        </div>
+        <button id="closeModalBtn" type="button" class="w-8 h-8 rounded-lg bg-white/5 hover:bg-[#39ff5a]/20 text-gray-300 hover:text-[#39ff5a] flex items-center justify-center transition">
+          ✕
+        </button>
+      </div>
 
-<!-- Price Table -->
-<div class="table-box">
+      <div class="grid grid-cols-2 gap-3 mb-5 text-sm">
+        <div class="p-3 rounded-xl bg-black/40 border border-white/10">
+          <div class="text-gray-400 text-xs">UC / SHELL</div>
+          <div id="modalUc" class="font-bold text-white mt-0.5">—</div>
+        </div>
+        <div class="p-3 rounded-xl bg-black/40 border border-white/10">
+          <div class="text-gray-400 text-xs">Buy Price</div>
+          <div id="modalBuy" class="font-bold text-gray-200 mt-0.5">0</div>
+        </div>
+        <div class="p-3 rounded-xl bg-black/40 border border-white/10">
+          <div class="text-gray-400 text-xs">Sell Price</div>
+          <div id="modalSell" class="font-bold text-gray-300 mt-0.5">0</div>
+        </div>
+        <div class="p-3 rounded-xl bg-[#39ff5a]/10 border border-[#39ff5a]/40">
+          <div class="text-[#39ff5a] text-xs font-semibold">Discount Price</div>
+          <div id="modalDiscount" class="font-extrabold text-[#39ff5a] text-base mt-0.5">0</div>
+        </div>
+      </div>
 
-<table>
+      <div class="flex gap-3">
+        <button id="copyOrderBtn" type="button" class="flex-1 py-3 px-4 rounded-xl bg-[#39ff5a] hover:bg-[#2ee84d] text-black font-bold text-sm tracking-wide shadow-[0_0_20px_rgba(57,255,90,0.4)] transition cursor-pointer">
+          📋 Copy Order Summary
+        </button>
+      </div>
+    </div>
+  </div>
 
-<tr>
-<th>Diamond List</th>
-<th>UC/SHELL</th>
-<th>Buy Price</th>
-<th>Sell Price</th>
-<th>Discount Price</th>
-</tr>
+  <!-- Toast Notification -->
+  <div id="toastBanner" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+    <div class="px-4 py-3 rounded-xl bg-[#0e1911] border border-[#39ff5a] text-white text-sm font-medium shadow-[0_0_25px_rgba(57,255,90,0.4)] flex items-center gap-2.5">
+      <span class="text-[#39ff5a] font-bold">✓</span>
+      <span id="toastMessage">Copied to clipboard!</span>
+    </div>
+  </div>
 
-<tr><td>☞ 25 Diamond </td><td>20</td><td>20</td><td>20</td><td>20</td></tr>
-<tr><td>☞ 50 Diamond </td><td>36</td><td>35</td><td>35</td><td>35</td></tr>
-<tr><td>☞ 115 Diamond </td><td>80</td><td>75</td><td>79</td><td>78</td></tr>
-<tr><td>☞ 240 Diamond </td><td>160</td><td>148</td><td>158</td><td>155</td></tr>
-<tr><td>☞ 355 Diamond </td><td>160, 80</td><td>223</td><td>237</td><td>232</td></tr>
-<tr><td>☞ 505 Diamond </td><td>160, 160, 20</td><td>316</td><td>336</td><td>330</td></tr>
-<tr><td>☞ 610 Diamond </td><td>405</td><td>376</td><td>400</td><td>395</td></tr>
-<tr><td>☞ 850 Diamond </td><td>405, 160</td><td>524</td><td>558</td><td>552</td></tr>
-<tr><td>☞ 1090 Diamond </td><td>405, 160, 160</td><td>672</td><td>716</td><td>710</td></tr>
-<tr><td>☞ 1240 Diamond </td><td>810</td><td>750</td><td>800</td><td>790</td></tr>
-<tr><td>☞ 2090 Diamond </td><td>810, 405, 160</td><td>1262</td><td>1358</td><td>1350</td></tr>
-<tr><td>☞ 2530 Diamond </td><td>1625</td><td>1500</td><td>1610</td><td>1595</td></tr>
-<tr><td>☞ 5060 Diamond </td><td>1625, 1625</td><td>3000</td><td>3220</td><td>3190</td></tr>
-<tr><td>☞ 10120 Diamond </td><td>1625, 1625, 1625, 1625</td><td>6000</td><td>6440</td><td>6390</td></tr>
+  <script>
+    (function () {
+      /* =========================================================
+         1. LIGHTWEIGHT PARTICLE CANVAS (NEON SPECKS & DIAMONDS)
+      ========================================================= */
+      const canvas = document.getElementById('particle-canvas');
+      const ctx = canvas.getContext('2d');
+      let particles = [];
+      let w = (canvas.width = window.innerWidth);
+      let h = (canvas.height = window.innerHeight);
 
-<tr class="category">
-<td colspan="6">Weekly Membership</td>
-</tr>
+      function resizeCanvas() {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+      }
+      window.addEventListener('resize', resizeCanvas);
 
-<tr><td>☞ 1x Weekly </td><td>161</td><td>149</td><td>158</td><td>156</td></tr>
-<tr><td>☞ 2x Weekly </td><td>161, 161</td><td>298</td><td>316</td><td>312</td></tr>
-<tr><td>☞ 3x Weekly </td><td>161, 161, 161</td><td>447</td><td>474</td><td>468</td></tr>
-<tr><td>☞ 5x Weekly </td><td>161, 161, 161, 161, 161</td><td>745</td><td>790</td><td>780</td></tr>
+      class Particle {
+        constructor() {
+          this.reset(true);
+        }
+        reset(initial = false) {
+          this.x = Math.random() * w;
+          this.y = initial ? Math.random() * h : h + 15;
+          this.size = Math.random() * 2.4 + 1;
+          this.speedY = -(Math.random() * 0.45 + 0.15);
+          this.speedX = (Math.random() - 0.5) * 0.25;
+          this.alpha = Math.random() * 0.55 + 0.15;
+          this.isDiamond = Math.random() > 0.72;
+        }
+        update() {
+          this.y += this.speedY;
+          this.x += this.speedX;
+          if (this.y < -15 || this.x < -15 || this.x > w + 15) {
+            this.reset(false);
+          }
+        }
+        draw() {
+          ctx.save();
+          ctx.globalAlpha = this.alpha;
+          ctx.fillStyle = '#39ff5a';
+          ctx.shadowBlur = 8;
+          ctx.shadowColor = '#39ff5a';
 
-<tr class="category">
-<td colspan="6">Monthly Membership</td>
-</tr>
+          if (this.isDiamond) {
+            ctx.translate(this.x, this.y);
+            ctx.rotate(Math.PI / 4);
+            ctx.fillRect(-this.size, -this.size, this.size * 2, this.size * 2);
+          } else {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          ctx.restore();
+        }
+      }
 
-<tr><td>☞ 1x Monthly </td><td>800</td><td>740</td><td>790</td><td>775</td></tr>
-<tr><td>☞ 2x Monthly </td><td>800, 800</td><td>1480</td><td>1580</td><td>1550</td></tr>
+      const particleCount = Math.min(48, Math.floor((w * h) / 26000));
+      for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle());
+      }
 
-<tr class="category">
-<td colspan="6">Combo Packs</td>
-</tr>
+      function animateParticles() {
+        ctx.clearRect(0, 0, w, h);
+        for (let i = 0; i < particles.length; i++) {
+          particles[i].update();
+          particles[i].draw();
+        }
+        requestAnimationFrame(animateParticles);
+      }
+      animateParticles();
 
-<tr><td>☞ 1x Weekly-1x Monthly </td><td>161, 800</td><td>889</td><td>948</td><td>932</td></tr>
-<tr><td>☞ 4x Weekly-1x Monthly </td><td>161, 161, 161, 161, 800</td><td>1336</td><td>1422</td><td>1400</td></tr>
-<tr><td>☞ 5x Weekly-1x Monthly </td><td>161, 161, 161, 161, 161, 800</td><td>1485</td><td>1580</td><td>1555</td></tr>
+      /* =========================================================
+         2. TABLE MOUSE SPOTLIGHT EFFECT
+      ========================================================= */
+      const spotlight = document.getElementById('tableSpotlight');
+      spotlight.addEventListener('mousemove', (e) => {
+        const rect = spotlight.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        spotlight.style.setProperty('--mouse-x', `${x}px`);
+        spotlight.style.setProperty('--mouse-y', `${y}px`);
+      });
 
-<tr class="category">
-<td colspan="6">Weekly Lite</td>
-</tr>
+      /* =========================================================
+         3. INTERSECTION OBSERVER STAGGERED ROW REVEAL
+      ========================================================= */
+      const revealRows = document.querySelectorAll('.reveal-row');
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry, idx) => {
+            if (entry.isIntersecting) {
+              setTimeout(() => {
+                entry.target.classList.add('visible');
+              }, (idx % 8) * 35);
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.06 }
+      );
+      revealRows.forEach((row) => observer.observe(row));
 
-<tr><td>☞ 1x Weekly Lite </td><td>18</td><td>39</td><td>42</td><td>41</td></tr>
-<tr><td>☞ 2x Weekly Lite </td><td>36</td><td>78</td><td>82</td><td>82</td></tr>
-<tr><td>☞ 3x Weekly Lite </td><td>54</td><td>117</td><td>125</td><td>125</td></tr>
-<tr><td>☞ 5x Weekly Lite </td><td>90</td><td>195</td><td>205</td><td>205</td></tr>
+      /* =========================================================
+         4. CATEGORY FILTERING & LIVE SEARCH
+      ========================================================= */
+      const categoryTabs = document.querySelectorAll('.filter-pill');
+      const searchInput = document.getElementById('searchInput');
+      const clearSearchBtn = document.getElementById('clearSearchBtn');
+      const itemRows = document.querySelectorAll('tr.item-row');
+      const categoryHeaders = document.querySelectorAll('tr.category-row');
+      const emptyState = document.getElementById('emptyState');
+      const visibleCountBadge = document.getElementById('visibleCountBadge');
 
-<tr class="category">
-<td colspan="6">Level Up Pass</td>
-</tr>
+      let activeCategory = 'all';
 
-<tr><td>☞ Level Up-6 </td><td>16</td><td>36</td><td>40</td><td>40</td></tr>
-<tr><td>☞ Level Up-10 </td><td>28</td><td>64</td><td>75</td><td>72</td></tr>
-<tr><td>☞ Level Up-15 </td><td>28</td><td>64</td><td>75</td><td>72</td></tr>
-<tr><td>☞ Level Up-20 </td><td>28</td><td>64</td><td>75</td><td>72</td></tr>
-<tr><td>☞ Level Up-25 </td><td>28</td><td>64</td><td>75</td><td>72</td></tr>
-<tr><td>☞ Level Up-30 </td><td>40</td><td>89</td><td>105</td><td>100</td></tr>
-<tr><td>☞ Full Level Up Pass </td><td>168</td><td>381</td><td>445</td><td>438</td></tr>
+      function filterTable() {
+        const query = searchInput.value.trim().toLowerCase();
+        clearSearchBtn.style.display = query.length > 0 ? 'flex' : 'none';
 
-<tr class="category">
-<td colspan="6">Evo Access</td>
-</tr>
+        let visibleItems = 0;
+        const activeCategoriesWithVisibleItems = new Set();
 
-<tr><td>☞ Evo 3 Day</td><td></td><td>00</td><td>00</td><td>00</td></tr>
-<tr><td>☞ Evo 7 Day</td><td></td><td>00</td><td>00</td><td>00</td></tr>
-<tr><td>☞ Evo 14 Day</td><td></td><td>00</td><td>00</td><td>00</td></tr>
-<tr><td>☞ Evo 30 Day</td><td></td><td>00</td><td>00</td><td>00</td></tr>
+        itemRows.forEach((row) => {
+          const cat = row.getAttribute('data-cat');
+          const text = row.textContent.toLowerCase();
+          const matchesCat = activeCategory === 'all' || cat === activeCategory;
+          const matchesQuery = query === '' || text.includes(query);
 
-</table>
+          if (matchesCat && matchesQuery) {
+            row.style.display = '';
+            row.classList.add('visible');
+            visibleItems++;
+            activeCategoriesWithVisibleItems.add(cat);
+          } else {
+            row.style.display = 'none';
+          }
+        });
 
-</div>
+        categoryHeaders.forEach((header) => {
+          const headerCat = header.getAttribute('data-cat-header');
+          const shouldShow =
+            (activeCategory === 'all' || activeCategory === headerCat) &&
+            activeCategoriesWithVisibleItems.has(headerCat);
+          header.style.display = shouldShow ? '' : 'none';
+          if (shouldShow) header.classList.add('visible');
+        });
 
-<div class="footer">
-© 2025 SHOTHiK STORE — All Rights Reserved
-</div>
+        visibleCountBadge.textContent = `${visibleItems} ${visibleItems === 1 ? 'Pack' : 'Packs'}`;
+        emptyState.classList.toggle('hidden', visibleItems > 0);
+      }
 
-</div>
+      categoryTabs.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          categoryTabs.forEach((b) => b.classList.remove('active'));
+          btn.classList.add('active');
+          activeCategory = btn.getAttribute('data-category');
+          filterTable();
+        });
+      });
 
+      searchInput.addEventListener('input', filterTable);
+      clearSearchBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        filterTable();
+        searchInput.focus();
+      });
+
+      /* =========================================================
+         5. QUICK ORDER MODAL & CLIPBOARD COPY
+      ========================================================= */
+      const modal = document.getElementById('packageModal');
+      const closeModalBtn = document.getElementById('closeModalBtn');
+      const copyOrderBtn = document.getElementById('copyOrderBtn');
+      const toastBanner = document.getElementById('toastBanner');
+      const toastMessage = document.getElementById('toastMessage');
+
+      let currentSelectionText = '';
+      let toastTimeout;
+
+      function showToast(msg) {
+        toastMessage.textContent = msg;
+        toastBanner.classList.remove('translate-y-20', 'opacity-0');
+        clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => {
+          toastBanner.classList.add('translate-y-20', 'opacity-0');
+        }, 2600);
+      }
+
+      itemRows.forEach((row) => {
+        row.addEventListener('click', () => {
+          const cells = row.querySelectorAll('td');
+          const name = cells[0].textContent.replace('☞', '').trim();
+          const uc = cells[1].textContent.trim();
+          const buy = cells[2].textContent.trim();
+          const sell = cells[3].textContent.trim();
+          const discount = cells[4].textContent.trim();
+
+          document.getElementById('modalTitle').textContent = name;
+          document.getElementById('modalUc').textContent = uc || '—';
+          document.getElementById('modalBuy').textContent = buy;
+          document.getElementById('modalSell').textContent = sell;
+          document.getElementById('modalDiscount').textContent = discount;
+
+          currentSelectionText = `SHOTHiK STORE Order:\n• Package: ${name}\n• UC/SHELL: ${uc}\n• Discount Price: ${discount}`;
+          modal.classList.add('open');
+        });
+      });
+
+      function closeModal() {
+        modal.classList.remove('open');
+      }
+
+      closeModalBtn.addEventListener('click', closeModal);
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeModal();
+      });
+
+      copyOrderBtn.addEventListener('click', () => {
+        const tempArea = document.createElement('textarea');
+        tempArea.value = currentSelectionText;
+        document.body.appendChild(tempArea);
+        tempArea.select();
+        try {
+          document.execCommand('copy');
+          showToast('Order summary copied to clipboard!');
+        } catch (err) {
+          showToast('Unable to copy automatically.');
+        }
+        document.body.removeChild(tempArea);
+        closeModal();
+      });
+    })();
+  </script>
 </body>
 </html>
