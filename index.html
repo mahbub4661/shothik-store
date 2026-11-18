@@ -1,1276 +1,735 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>SHOTHiK STORE — Premium Diamond & Membership Shop</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Google Fonts for Gaming / Cyberpunk Typography -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@600;700;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050908">
+<title>SHOTHiK STORE</title>
 
-  <style>
-    :root {
-      --neon-green: #39ff5a;
-      --neon-green-dim: rgba(57, 255, 90, 0.16);
-      --neon-green-glow: rgba(57, 255, 90, 0.45);
-      --bg-obsidian: #040605;
-      --card-glass: rgba(13, 18, 15, 0.72);
-      --border-glass: rgba(57, 255, 90, 0.18);
-    }
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800&family=Rajdhani:wght@500;600;700&display=swap');
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+:root {
+  --neon: #39ff75;
+  --bg: #050908;
+  --glass: rgba(15,30,23,.85);
+  --border: rgba(57,255,117,.25);
+}
 
-    html {
-      scroll-behavior: smooth;
-    }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: var(--bg-obsidian);
-      color: #f3f7f4;
-      overflow-x: hidden;
-      min-height: 100vh;
-      position: relative;
-    }
+html {
+  width: 100%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
 
-    /* Animated Cyberpunk Perspective Grid Background */
-    .cyber-grid {
-      position: fixed;
-      inset: 0;
-      z-index: -3;
-      background-image:
-        linear-gradient(to right, rgba(57, 255, 90, 0.045) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(57, 255, 90, 0.045) 1px, transparent 1px);
-      background-size: 46px 46px;
-      mask-image: radial-gradient(ellipse 85% 75% at 50% 35%, #000 35%, transparent 100%);
-      -webkit-mask-image: radial-gradient(ellipse 85% 75% at 50% 35%, #000 35%, transparent 100%);
-      animation: gridDrift 22s linear infinite;
-    }
+body {
+  width: 100%;
+  min-height: 100vh;
+  background: var(--bg);
+  color: white;
+  font-family: 'Rajdhani', Arial, sans-serif;
+  overflow-x: hidden;
+}
 
-    @keyframes gridDrift {
-      0% {
-        background-position: 0 0;
-      }
-      100% {
-        background-position: 46px 46px;
-      }
-    }
+#particles {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  pointer-events: none;
+}
 
-    /* Interactive Canvas Particles */
-    #particle-canvas {
-      position: fixed;
-      inset: 0;
-      z-index: -2;
-      pointer-events: none;
-    }
+.glow {
+  position: fixed;
+  width: 300px;
+  height: 300px;
+  background: #39ff7525;
+  border-radius: 50%;
+  filter: blur(100px);
+  z-index: -1;
+  pointer-events: none;
+}
 
-    /* Ambient Floating Neon Orbs */
-    .ambient-orb {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(110px);
-      z-index: -1;
-      pointer-events: none;
-      opacity: 0.45;
-      animation: orbFloat 14s infinite alternate ease-in-out;
-    }
+.glow.one { top: -100px; left: -100px; }
+.glow.two { bottom: -100px; right: -100px; }
 
-    .orb-1 {
-      width: 360px;
-      height: 360px;
-      background: radial-gradient(circle, rgba(57, 255, 90, 0.35), transparent 70%);
-      top: -80px;
-      left: -80px;
-    }
+.container {
+  width: 100%;
+  max-width: 1150px;
+  margin: auto;
+  padding: 15px;
+}
 
-    .orb-2 {
-      width: 420px;
-      height: 420px;
-      background: radial-gradient(circle, rgba(16, 185, 129, 0.25), transparent 70%);
-      bottom: -100px;
-      right: -90px;
-      animation-delay: -5s;
-    }
+/* HEADER */
 
-    .orb-3 {
-      width: 260px;
-      height: 260px;
-      background: radial-gradient(circle, rgba(57, 255, 90, 0.18), transparent 70%);
-      top: 45%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      animation-duration: 18s;
-    }
+header {
+  text-align: center;
+  padding: 40px 10px 25px;
+}
 
-    @keyframes orbFloat {
-      0% {
-        transform: translate(0, 0) scale(1);
-      }
-      100% {
-        transform: translate(45px, 35px) scale(1.12);
-      }
-    }
+.logo-frame {
+  display: inline-block;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--glass);
+  box-shadow: 0 0 30px #39ff7520;
+}
 
-    /* Logo Showcase & Rotating Energy Ring */
-    .logo-ring-wrapper {
-      position: relative;
-      width: clamp(128px, 24vw, 196px);
-      height: clamp(128px, 24vw, 196px);
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      animation: logoHover 4.5s ease-in-out infinite;
-    }
+.logo-frame img {
+  width: 170px;
+  max-width: 70vw;
+  display: block;
+  animation: float 4s infinite ease-in-out;
+  filter: drop-shadow(0 0 15px #39ff7580);
+}
 
-    @keyframes logoHover {
-      0%, 100% {
-        transform: translateY(0px);
-      }
-      50% {
-        transform: translateY(-9px);
-      }
-    }
+@keyframes float {
+  50% { transform: translateY(-8px); }
+}
 
-    .energy-ring-outer {
-      position: absolute;
-      inset: -8px;
-      border-radius: 50%;
-      border: 2px dashed rgba(57, 255, 90, 0.55);
-      box-shadow: 0 0 25px rgba(57, 255, 90, 0.22), inset 0 0 18px rgba(57, 255, 90, 0.15);
-      animation: spinClockwise 16s linear infinite;
-    }
+.store-name {
+  margin-top: 22px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(25px, 5vw, 46px);
+  font-weight: 800;
+  letter-spacing: 4px;
+  color: var(--neon);
+  text-shadow: 0 0 15px #39ff75;
+}
 
-    .energy-ring-inner {
-      position: absolute;
-      inset: 2px;
-      border-radius: 50%;
-      border: 2px solid transparent;
-      border-top-color: #39ff5a;
-      border-bottom-color: #39ff5a;
-      filter: drop-shadow(0 0 8px #39ff5a);
-      animation: spinCounterClockwise 7s linear infinite;
-    }
+.subtitle {
+  color: #aaa;
+  margin-top: 10px;
+  font-size: 17px;
+  letter-spacing: 2px;
+}
 
-    @keyframes spinClockwise {
-      to {
-        transform: rotate(360deg);
-      }
-    }
+.status {
+  display: inline-block;
+  margin-top: 18px;
+  padding: 7px 16px;
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  color: var(--neon);
+  background: #39ff7510;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
 
-    @keyframes spinCounterClockwise {
-      to {
-        transform: rotate(-360deg);
-      }
-    }
+/* STATS */
 
-    .logo-frame {
-      width: clamp(112px, 21vw, 172px);
-      height: clamp(112px, 21vw, 172px);
-      border-radius: 50%;
-      overflow: hidden;
-      background: radial-gradient(circle at 30% 30%, #142419, #060a07);
-      border: 2px solid rgba(57, 255, 90, 0.5);
-      box-shadow: 0 0 35px rgba(57, 255, 90, 0.35);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      z-index: 2;
-    }
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 20px 0 25px;
+}
 
-    .logo-frame img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
+.stat-card {
+  padding: 17px 5px;
+  text-align: center;
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  backdrop-filter: blur(15px);
+}
 
-    /* Fallback Badge when local logo.jpg is absent in preview */
-    .logo-fallback {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 12px;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle, rgba(57, 255, 90, 0.18) 0%, rgba(5, 10, 7, 0.96) 75%);
-    }
+.stat-card strong {
+  display: block;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 22px;
+  color: var(--neon);
+}
 
-    /* Shimmer & Subtle Glitch Cyberpunk Title */
-    .brand-title {
-      font-family: 'Orbitron', sans-serif;
-      font-weight: 900;
-      font-size: clamp(1.65rem, 5vw, 3.65rem);
-      line-height: 1.12;
-      letter-spacing: clamp(0.04em, 0.5vw, 0.08em);
-      background: linear-gradient(90deg, #ffffff 0%, #39ff5a 35%, #b6ffc2 50%, #39ff5a 65%, #ffffff 100%);
-      background-size: 220% auto;
-      color: transparent;
-      -webkit-background-clip: text;
-      background-clip: text;
-      animation: titleShimmer 4.5s linear infinite;
-      text-shadow: 0 0 28px rgba(57, 255, 90, 0.35);
-      position: relative;
-    }
+.stat-card span {
+  font-size: 13px;
+  color: #aaa;
+}
 
-    @keyframes titleShimmer {
-      0% {
-        background-position: 200% center;
-      }
-      100% {
-        background-position: -200% center;
-      }
-    }
+/* MAIN PRICE PANEL */
 
-    /* Status Pill Pulse */
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background-color: #39ff5a;
-      box-shadow: 0 0 10px #39ff5a;
-      animation: pulseDot 1.6s infinite ease-in-out;
-    }
+.price-panel {
+  width: 100%;
+  padding: 20px;
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  backdrop-filter: blur(15px);
+  box-shadow: 0 0 30px #39ff7510;
+}
 
-    @keyframes pulseDot {
-      0%, 100% {
-        transform: scale(1);
-        opacity: 1;
-      }
-      50% {
-        transform: scale(1.45);
-        opacity: 0.55;
-      }
-    }
+.heading {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 19px;
+  color: var(--neon);
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
 
-    /* Glassmorphic Controls & Category Filter Pills */
-    .glass-panel {
-      background: var(--card-glass);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid var(--border-glass);
-      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.65), 0 0 25px rgba(57, 255, 90, 0.06);
-    }
+/* SEARCH */
 
-    .filter-pill {
-      font-family: 'Rajdhani', sans-serif;
-      font-weight: 700;
-      font-size: clamp(0.82rem, 1.5vw, 0.95rem);
-      letter-spacing: 0.04em;
-      transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
-      border: 1px solid rgba(57, 255, 90, 0.2);
-      background: rgba(15, 22, 18, 0.75);
-      color: #b7c9bd;
-      white-space: nowrap;
-      flex-shrink: 0;
-      touch-action: manipulation;
-    }
+.search-box {
+  position: relative;
+  margin-bottom: 18px;
+}
 
-    .filter-pill:hover {
-      border-color: rgba(57, 255, 90, 0.65);
-      color: #ffffff;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 15px rgba(57, 255, 90, 0.18);
-    }
+.search-box input {
+  width: 100%;
+  padding: 13px 15px 13px 42px;
+  border-radius: 10px;
+  background: #080e0b;
+  border: 1px solid var(--border);
+  color: white;
+  outline: none;
+  font-family: inherit;
+  font-size: 16px;
+}
 
-    .filter-pill.active {
-      background: linear-gradient(135deg, #39ff5a 0%, #19c93c 100%);
-      color: #030804;
-      border-color: #39ff5a;
-      box-shadow: 0 0 20px rgba(57, 255, 90, 0.45);
-    }
+.search-box input:focus {
+  border-color: var(--neon);
+  box-shadow: 0 0 12px #39ff7530;
+}
 
-    /* Hide scrollbar for horizontal filter ribbon on mobile */
-    .no-scrollbar::-webkit-scrollbar {
-      display: none;
-    }
-    .no-scrollbar {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
+.search-icon {
+  position: absolute;
+  left: 14px;
+  top: 10px;
+  font-size: 20px;
+  color: var(--neon);
+}
 
-    /* Table Spotlight Wrapper */
-    .table-spotlight-container {
-      position: relative;
-      border-radius: clamp(14px, 2vw, 20px);
-      overflow: hidden;
-    }
-    /* Responsive Table Scroll Wrapper with Mobile Edge Fade */
-    .table-scroll-wrap {
-      width: 100%;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      position: relative;
-      z-index: 2;
-    }
+/* FILTERS - NO SLIDER */
 
-    /* Price Table Styling */
-    .price-table {
-      width: 100%;
-      min-width: 100%;
-      border-collapse: collapse;
-      position: relative;
-      z-index: 2;
-    }
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 8px;
+  margin-bottom: 20px;
+}
 
-    .price-table thead th {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      background: linear-gradient(180deg, rgba(16, 32, 21, 0.98) 0%, rgba(10, 20, 14, 0.98) 100%);
-      backdrop-filter: blur(12px);
-      color: #39ff5a;
-      font-family: 'Orbitron', sans-serif;
-      font-size: clamp(0.66rem, 1.25vw, 0.82rem);
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      padding: clamp(12px, 2vw, 17px) clamp(8px, 1.8vw, 18px);
-      border-bottom: 2px solid rgba(57, 255, 90, 0.45);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-      white-space: nowrap;
-    }
+.filter-btn {
+  flex: 0 0 auto;
+  padding: 9px 13px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #101a14;
+  color: #ccc;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .25s;
+}
 
-    /* Category Divider Row */
-    tr.category-row td {
-      background: linear-gradient(90deg, rgba(57, 255, 90, 0.16) 0%, rgba(20, 35, 25, 0.82) 50%, rgba(57, 255, 90, 0.16) 100%);
-      color: #39ff5a;
-      font-family: 'Orbitron', sans-serif;
-      font-weight: 700;
-      font-size: clamp(0.74rem, 1.4vw, 0.88rem);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      padding: clamp(10px, 1.8vw, 14px) 14px;
-      text-align: center;
-      border-top: 1px solid rgba(57, 255, 90, 0.3);
-      border-bottom: 1px solid rgba(57, 255, 90, 0.3);
-      text-shadow: 0 0 12px rgba(57, 255, 90, 0.45);
-    }
+.filter-btn:hover,
+.filter-btn.active {
+  background: var(--neon);
+  color: #031008;
+  box-shadow: 0 0 15px #39ff7550;
+}
 
-    /* Item Data Row */
-    tr.item-row {
-      border-bottom: 1px solid rgba(255, 255, 255, 0.055);
-      transition: background-color 0.25s ease, transform 0.25s ease;
-      cursor: pointer;
-      position: relative;
-    }
+/* TABLE */
 
-    tr.item-row td {
-      padding: clamp(11px, 1.8vw, 15px) clamp(8px, 1.6vw, 16px);
-      text-align: center;
-      font-family: 'Rajdhani', sans-serif;
-      font-size: clamp(0.9rem, 1.6vw, 1.08rem);
-      font-weight: 600;
-      transition: all 0.25s ease;
-    }
+.table-scroll {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 10px;
+  border: 1px solid #39ff7520;
+}
 
-    tr.item-row td:first-child {
-      text-align: left;
-      padding-left: clamp(12px, 2.2vw, 24px);
-      font-weight: 700;
-      color: #f0f7f2;
-      position: relative;
-      white-space: nowrap;
-    }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
 
-    /* Category Divider Row */
-    tr.category-row td {
-      background: linear-gradient(90deg, rgba(57, 255, 90, 0.16) 0%, rgba(20, 35, 25, 0.75) 50%, rgba(57, 255, 90, 0.16) 100%);
-      color: #39ff5a;
-      font-family: 'Orbitron', sans-serif;
-      font-weight: 700;
-      font-size: 0.85rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      padding: 13px 16px;
-      text-align: center;
-      border-top: 1px solid rgba(57, 255, 90, 0.3);
-      border-bottom: 1px solid rgba(57, 255, 90, 0.3);
-      text-shadow: 0 0 12px rgba(57, 255, 90, 0.45);
-    }
+thead {
+  background: var(--neon);
+  color: black;
+}
 
-    /* Item Data Row */
-    tr.item-row {
-      border-bottom: 1px solid rgba(255, 255, 255, 0.055);
-      transition: background-color 0.25s ease, transform 0.25s ease;
-      cursor: pointer;
-      position: relative;
-    }
+th {
+  padding: 13px 5px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 11px;
+  overflow-wrap: anywhere;
+}
 
-    tr.item-row td {
-      padding: 14px 12px;
-      text-align: center;
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 1.05rem;
-      font-weight: 600;
-      transition: all 0.25s ease;
-    }
+td {
+  padding: 12px 5px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  border-bottom: 1px solid #ffffff12;
+  overflow-wrap: anywhere;
+}
 
-    tr.item-row td:first-child {
-      text-align: left;
-      padding-left: 22px;
-      font-weight: 700;
-      color: #f0f7f2;
-      position: relative;
-    }
+tbody tr:not(.category-row):hover {
+  background: #39ff7515;
+}
 
-    /* Sliding Left Neon Indicator on Hover */
-    tr.item-row td:first-child::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 14%;
-      bottom: 14%;
-      width: 4px;
-      border-radius: 0 4px 4px 0;
-      background: #39ff5a;
-      box-shadow: 0 0 12px #39ff5a;
-      transform: scaleY(0);
-      transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
-    }
+tbody tr:not(.category-row) td:last-child {
+  color: var(--neon);
+}
 
-    tr.item-row:hover {
-      background-color: rgba(57, 255, 90, 0.08);
-    }
+.category-row td {
+  padding: 13px;
+  background: #39ff7515;
+  color: var(--neon);
+  font-family: 'Orbitron', sans-serif;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
 
-    tr.item-row:hover td:first-child {
-      color: #39ff5a;
-      transform: translateX(4px);
-    }
+.empty-message {
+  display: none;
+  padding: 30px;
+  text-align: center;
+  color: var(--neon);
+}
 
-    tr.item-row:hover td:first-child::before {
-      transform: scaleY(1);
-    }
+/* FOOTER */
 
-    /* Discount Pill Badge */
-    .discount-badge {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: clamp(46px, 6vw, 62px);
-      padding: 3px clamp(8px, 1.4vw, 14px);
-      border-radius: 999px;
-      background: rgba(57, 255, 90, 0.14);
-      border: 1px solid rgba(57, 255, 90, 0.45);
-      color: #39ff5a;
-      font-weight: 700;
-      box-shadow: 0 0 12px rgba(57, 255, 90, 0.18);
-      transition: all 0.25s ease;
-    }
+footer {
+  padding: 35px 10px 20px;
+  text-align: center;
+  color: #777;
+}
 
-    tr.item-row:hover .discount-badge {
-      background: #39ff5a;
-      color: #030804;
-      box-shadow: 0 0 18px rgba(57, 255, 90, 0.65);
-    }
+footer strong {
+  color: var(--neon);
+  font-family: 'Orbitron', sans-serif;
+}
 
-    /* Clean Sell Price Styling (No Strikethrough) */
-    .sell-strike {
-      color: #c8d6cd;
-    }
+.footer-line {
+  width: 80px;
+  height: 2px;
+  background: var(--neon);
+  margin: 0 auto 18px;
+  box-shadow: 0 0 10px var(--neon);
+}
 
-    /* Scroll Reveal Animation */
-    .reveal-row {
-      opacity: 0;
-      transform: translateY(14px);
-      transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-    }
+/* MOBILE */
 
-    .reveal-row.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+@media(max-width:600px) {
 
-    /* Modal Backdrop & Entrance */
-    .modal-backdrop {
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.28s ease;
-    }
+  .container {
+    padding: 10px;
+  }
 
-    .modal-backdrop.open {
-      opacity: 1;
-      pointer-events: auto;
-    }
+  header {
+    padding-top: 25px;
+  }
 
-    .modal-card {
-      transform: scale(0.92) translateY(16px);
-      transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
-      max-height: 90vh;
-      overflow-y: auto;
-    }
+  .store-name {
+    letter-spacing: 2px;
+  }
 
-    .modal-backdrop.open .modal-card {
-      transform: scale(1) translateY(0);
-    }
+  .stats {
+    gap: 7px;
+  }
 
-    /* Small Phone Optimization (320px - 639px) */
-    @media (max-width: 639px) {
-      .price-table thead th:first-child,
-      tr.item-row td:first-child {
-        position: sticky;
-        left: 0;
-        z-index: 5;
-        background: rgba(11, 16, 13, 0.96);
-        backdrop-filter: blur(10px);
-        box-shadow: 4px 0 12px rgba(0, 0, 0, 0.45);
-      }
+  .stat-card strong {
+    font-size: 17px;
+  }
 
-      .price-table thead th:first-child {
-        z-index: 12;
-        background: rgba(13, 26, 17, 0.98);
-      }
+  .stat-card span {
+    font-size: 11px;
+  }
 
-      tr.item-row:hover td:first-child {
-        background: rgba(18, 34, 23, 0.98);
-      }
+  .price-panel {
+    padding: 12px 8px;
+  }
 
-      /* Allow long UC/SHELL strings to wrap neatly on narrow screens */
-      tr.item-row td:nth-child(2) {
-        min-width: 82px;
-        line-height: 1.2;
-        font-size: 0.84rem;
-      }
-    }
+  .heading {
+    font-size: 15px;
+  }
 
-    /* Widescreen Desktop Optimization (1280px+) */
-    @media (min-width: 1280px) {
-      .price-table thead th:first-child,
-      tr.item-row td:first-child {
-        width: 30%;
-      }
-    }
-  </style>
+  .filters {
+    gap: 6px;
+  }
+
+  .filter-btn {
+    padding: 8px 9px;
+    font-size: 12px;
+  }
+
+  th {
+    font-size: 9px;
+    padding: 10px 3px;
+  }
+
+  td {
+    font-size: 12px;
+    padding: 10px 3px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+</style>
 </head>
+
 <body>
 
-  <!-- Animated Cyberpunk Grid & Floating Neon Orbs -->
-  <div class="cyber-grid"></div>
-  <canvas id="particle-canvas"></canvas>
-  <div class="ambient-orb orb-1"></div>
-  <div class="ambient-orb orb-2"></div>
-  <div class="ambient-orb orb-3"></div>
+<canvas id="particles"></canvas>
 
-  <!-- Main Container -->
-  <div class="w-full max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-10 lg:py-12 relative z-10">
+<div class="glow one"></div>
+<div class="glow two"></div>
 
-    <!-- Header & Logo Showcase -->
-    <header class="text-center mb-7 sm:mb-10">
-      <!-- Live Status Badge -->
-      <div class="inline-flex items-center gap-2 sm:gap-2.5 px-3.5 sm:px-4 py-1.5 rounded-full glass-panel mb-4 sm:mb-6">
-        <span class="status-dot"></span>
-        <span class="text-[11px] sm:text-sm font-semibold tracking-wider text-[#39ff5a] uppercase" style="font-family: 'Rajdhani', sans-serif;">
-          ⚡ INSTANT TOP-UP • 24/7 ACTIVE
-        </span>
-      </div>
+<div class="container">
 
-      <!-- Logo with Rotating Energy Ring -->
-      <div class="logo-ring-wrapper mb-4 sm:mb-5">
-        <div class="energy-ring-outer"></div>
-        <div class="energy-ring-inner"></div>
-        <div class="logo-frame">
-          <!-- Preserving exact src="logo.jpg" with clean fallback if local file is missing -->
-          <img
-            src="logo.jpg"
-            alt="SHOTHiK STORE"
-            onerror="this.style.display='none'; document.getElementById('logoFallback').style.display='flex';"
-          >
-          <div id="logoFallback" class="logo-fallback">
-            <svg class="w-12 h-12 text-[#39ff5a] mb-1 drop-shadow-[0_0_10px_rgba(57,255,90,0.8)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <path d="M6 3h12l4 6-10 13L2 9z"/>
-              <path d="M11 3 8 9l4 13 4-13-3-6"/>
-              <path d="M2 9h20"/>
-            </svg>
-            <span class="text-[11px] font-bold tracking-widest text-[#39ff5a]" style="font-family:'Orbitron',sans-serif;">SHOTHiK</span>
-          </div>
-        </div>
-      </div>
+<header>
 
-      <!-- Cyberpunk Title & Subtitle -->
-      <h1 class="brand-title uppercase mb-2 sm:mb-3 px-2">
-        SHOTHiK STORE
-      </h1>
-      <p class="text-xs sm:text-base md:text-lg text-gray-300/90 max-w-xl mx-auto font-medium px-2">
-        Premium Diamond &amp; Membership Shop 💎 — Fast, Trusted &amp; Best Rates
-      </p>
-    </header>
+  <div class="logo-frame">
+    <img src="logo.jpg" alt="SHOTHiK STORE">
+  </div>
 
-    <!-- Interactive Filter & Search Controls -->
-    <section class="glass-panel rounded-2xl p-3.5 sm:p-5 mb-5 sm:mb-6">
-      <div class="flex flex-col md:flex-row gap-3 sm:gap-4 items-stretch md:items-center justify-between">
-        <!-- Search Input -->
-        <div class="relative flex-1">
-          <span class="absolute inset-y-0 left-3.5 flex items-center text-[#39ff5a]/80 pointer-events-none">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-              <circle cx="11" cy="11" r="8"></circle>
-              <path d="m21 21-4.3-4.3"></path>
-            </svg>
-          </span>
-          <input
-            type="text"
-            id="searchInput"
-            placeholder="Search diamond pack, membership, price..."
-            class="w-full pl-10 pr-9 py-2.5 rounded-xl bg-[#070b08]/90 border border-[#39ff5a]/25 text-sm sm:text-base text-white placeholder-gray-400 focus:outline-none focus:border-[#39ff5a] focus:ring-2 focus:ring-[#39ff5a]/25 transition"
-          >
-          <button
-            id="clearSearchBtn"
-            type="button"
-            aria-label="Clear search"
-            class="hidden absolute inset-y-0 right-3 items-center text-gray-400 hover:text-[#39ff5a] text-sm font-bold p-1"
-          >
-            ✕
-          </button>
-        </div>
+  <h1 class="store-name">SHOTHiK STORE</h1>
 
-        <!-- Quick Hint -->
-        <div class="text-xs sm:text-sm text-gray-400 flex items-center justify-between md:justify-end gap-3 px-1">
-          <span>💡 Tap any row to copy / order</span>
-          <span id="visibleCountBadge" class="px-2.5 py-1 rounded-lg bg-[#39ff5a]/10 border border-[#39ff5a]/30 text-[#39ff5a] font-semibold whitespace-nowrap">
-            35 Packs
-          </span>
-        </div>
-      </div>
+  <p class="subtitle">PREMIUM DIAMOND & MEMBERSHIP SHOP 💎</p>
 
-      <!-- Category Filter Pills: Horizontal swipe on mobile, clean wrap on desktop -->
-      <div id="categoryTabs" class="flex items-center md:flex-wrap gap-2 overflow-x-auto md:overflow-visible no-scrollbar pt-3.5 sm:pt-4 mt-3.5 sm:mt-4 border-t border-white/10">
-        <button type="button" class="filter-pill active px-3.5 sm:px-4 py-2 rounded-xl" data-category="all">All Packs</button>
-        <button type="button" class="filter-pill px-3.5 sm:px-4 py-2 rounded-xl" data-category="diamonds">💎 Diamonds</button>
-        <button type="button" class="filter-pill px-3.5 sm:px-4 py-2 rounded-xl" data-category="weekly">Weekly</button>
-        <button type="button" class="filter-pill px-3.5 sm:px-4 py-2 rounded-xl" data-category="monthly">Monthly</button>
-        <button type="button" class="filter-pill px-3.5 sm:px-4 py-2 rounded-xl" data-category="combo">Combo Packs</button>
-        <button type="button" class="filter-pill px-3.5 sm:px-4 py-2 rounded-xl" data-category="weekly-lite">Weekly Lite</button>
-        <button type="button" class="filter-pill px-3.5 sm:px-4 py-2 rounded-xl" data-category="level-up">Level Up Pass</button>
-        <button type="button" class="filter-pill px-3.5 sm:px-4 py-2 rounded-xl" data-category="evo">Evo Access</button>
-      </div>
-    </section>
+  <div class="status">● PREMIUM GAMING STORE</div>
 
-    <!-- Price Table Container -->
-    <main class="glass-panel table-spotlight-container" id="tableSpotlight">
-      <div class="table-scroll-wrap">
-        <table class="price-table" id="priceTable">
-          <thead>
-            <tr>
-              <th class="text-left pl-3 sm:pl-6">Diamond List</th>
-              <th>UC/SHELL</th>
-              <th>Buy Price</th>
-              <th>Sell Price</th>
-              <th>Discount Price</th>
-            </tr>
-          </thead>
+</header>
 
-          <tbody id="priceTableBody">
-            <!-- Diamond List -->
-            <tr class="item-row reveal-row" data-cat="diamonds">
-              <td>☞ 25 Diamond</td>
-              <td>20</td>
-              <td>20</td>
-              <td>20</td>
-              <td><span class="discount-badge">20</span></td>
-            </tr>
-            <tr class="item-row reveal-row" data-cat="diamonds">
-              <td>☞ 50 Diamond</td>
-              <td>36</td>
-              <td>35</td>
-              <td>35</td>
-              <td><span class="discount-badge">35</span></td>
-            </tr>
-            <tr class="item-row reveal-row" data-cat="diamonds">
-              <td>☞ 115 Diamond</td>
-              <td>80</td>
-              <td>75</td>
-              <td class="sell-strike">79</td>
-              <td><span class="discount-badge">78</span></td>
-            </tr>
-            <tr class="item-row reveal-row" data-cat="diamonds">
-              <td>☞ 240 Diamond</td>
-              <td>160</td>
-              <td>150</td>
-              <td class="sell-strike">158</td>
-              <td><span class="discount-badge">155</span></td>
-            </tr>
-            <tr class="item-row reveal-row" data-cat="diamonds">
-              <td>☞ 355 Diamond</td>
-              <td>160, 80</td>
-              <td>225</td>
-              <td class="sell-strike">237</td>
-              <td><span class="discount-badge">232</span></td>
-            </tr>
-            <tr class="item-row reveal-row" data-cat="diamonds">
-              <td>☞ 505 Diamond</td>
-              <td>160, 160, 20</td>
-              <td>320</td>
-              <td class="sell-strike">336</td>
-              <td><span class="discount-badge">330</span></td>
-            </tr>
-            <tr class="item-row reveal-row" data-cat="diamonds">
-              <td>☞ 610 Diamond</td>
-              <td>405</td>
-              <td>380</td>
-              <td class="sell-strike">400</td>
-              <td><span class="discount-badge">395</span></td>
-            </tr>
-            <tr class="item-row reveal-row" data-cat="diamonds">
-              <td>☞ 850 Diamond</td>
-              <td>405, 160</td>
-              <td>530</td>
-              <td class="sell-strike">558</td>
-              <td><span class="discount-badge">552</span></td>
-            </tr>
-            <tr class="item-row reveal-row" data-cat="diamonds">
-              <td>☞ 1090 Diamond</td>
-              <td>405, 160, 160</td>
-              <td>680</td>
-              <td class="sell-strike">716</td>
-              <td><span class="discount-badge">710</span></td>
-            </tr>
-            <tr class="item-row reveal-row" data-cat="diamonds">
-              <td>☞ 1240 Diamond</td>
-              <td>810</td>
-              <td>758</td>
-              <td class="sell-strike">800</td>
-              <td><span class="discount-badge">790</span></td>
-            </tr>
-            <tr class="item-row reveal-row" data-cat="diamonds">
-              <td>☞ 2090 Diamond</td>
-              <td>810, 405, 160</td>
-              <td>1288</td>
-              <td class="sell-strike">1358</td>
-              <td><span class="discount-badge">1350</span></td>
-            </tr>
-            <tr class="item-row reveal-row" data-cat="diamonds">
-              <td>☞ 2530 Diamond</td>
-              <td>1625</td>
-              <td>1521</td>
-              <td class="sell-strike">1610</td>
-              <td><span class="discount-badge">1595</span></td>
-            </tr>
-            <tr class="item-row reveal-row" data-cat="diamonds">
-              <td>☞ 5060 Diamond</td>
-              <td>1625, 1625</td>
-              <td>3042</td>
-              <td class="sell-strike">3220</td>
-              <td><span class="discount-badge">3190</span></td>
-            </tr>
-            <tr class="item-row reveal-row" data-cat="diamonds">
-              <td>☞ 10120 Diamond</td>
-              <td>1625, 1625, 1625, 1625</td>
-              <td>6084</td>
-              <td class="sell-strike">6440</td>
-              <td><span class="discount-badge">6390</span></td>
-            </tr>
+<div class="stats">
 
-            <!-- Weekly Membership -->
-            <tr class="category-row reveal-row" data-cat-header="weekly">
-              <td colspan="5">Weekly Membership</td>
-            </tr>
-            <tr class="item-row reveal-row" data-cat="weekly">
-              <td>☞ 1x Weekly</td>
-              <td>161</td>
-              <td>151</td>
-              <td class="sell-strike">158</td>
-              <td><span class="discount-badge">156</span></td>
-            </tr>
-            <tr class="item-row reveal-row" data-cat="weekly">
-              <td>☞ 2x Weekly</td>
-              <td>161, 161</td>
-              <td>302</td>
-              <td class="sell-strike">316</td>
-              <td><span class="discount-badge">312</span></td>
-            </tr>
-            <tr class="item-row reveal-row" data-cat="weekly">
-              <td>☞ 3x Weekly</td>
-              <td>161, 161, 161</td>
-              <td>453</td>
-              <td class="sell-strike">474</td>
-              <td><span class="discount-badge">468</span></td>
-            </tr>
-            <tr class="item-row reveal-row" data-cat="weekly">
-              <td>☞ 5x Weekly</td>
-              <td>161, 161, 161, 161, 161</td>
-              <td>755</td>
-              <td class="sell-strike">790</td>
-              <td><span class="discount-badge">780</span></td>
-            </tr>
+  <div class="stat-card">
+    <strong id="productCount">39</strong>
+    <span>PRODUCTS</span>
+  </div>
 
-            <!-- Monthly Membership -->
-            <tr class="category-row reveal-row" data-cat-header="monthly">
-              <td colspan="5">Monthly Membership</td>
-            </tr>
-            <tr class="item-row reveal-row" data-cat="monthly">
-              <td>☞ 1x Monthly</td>
-              <td>800</td>
-              <td>749</td>
-              <td class="sell-strike">790</td>
-              <td><span class="discount-badge">775</span></td>
-            </tr>
-            <tr class="item-row reveal-row" data-cat="monthly">
-              <td>☞ 2x Monthly</td>
-              <td>800, 800</td>
-              <td>1498</td>
-              <td class="sell-strike">1580</td>
-              <td><span class="discount-badge">1550</span></td>
-            </tr>
+  <div class="stat-card">
+    <strong>08</strong>
+    <span>CATEGORIES</span>
+  </div>
 
-            <!-- Combo Packs -->
-            <tr class="category-row reveal-row" data-cat-header="combo">
-              <td colspan="5">Combo Packs</td>
-            </tr>
-            <tr class="item-row reveal-row" data-cat="combo">
-              <td>☞ 1x Weekly-1x Monthly</td>
-              <td>161, 800</td>
-              <td>900</td>
-              <td class="sell-strike">948</td>
-              <td><span class="discount-badge">932</span></td>
-            </tr>
-            <tr class="item-row reveal-row" data-cat="combo">
-              <td>☞ 4x Weekly-1x Monthly</td>
-              <td>161, 161, 161, 161, 800</td>
-              <td>1353</td>
-              <td class="sell-strike">1422</td>
-              <td><span class="discount-badge">1400</span></td>
-            </tr>
-            <tr class="item-row reveal-row" data-cat="combo">
-              <td>☞ 5x Weekly-1x Monthly</td>
-              <td>161, 161, 161, 161, 161, 800</td>
-              <td>1504</td>
-              <td class="sell-strike">1580</td>
-              <td><span class="discount-badge">1555</span></td>
-            </tr>
+  <div class="stat-card">
+    <strong>24/7</strong>
+    <span>ONLINE STORE</span>
+  </div>
 
-            <!-- Weekly Lite -->
-            <tr class="category-row reveal-row" data-cat-header="weekly-lite">
-              <td colspan="5">Weekly Lite</td>
-            </tr>
-            <tr class="item-row reveal-row" data-cat="weekly-lite">
-              <td>☞ 1x Weekly Lite</td>
-              <td>18</td>
-              <td>39</td>
-              <td class="sell-strike">42</td>
-              <td><span class="discount-badge">41</span></td>
-            </tr>
-            <tr class="item-row reveal-row" data-cat="weekly-lite">
-              <td>☞ 2x Weekly Lite</td>
-              <td>36</td>
-              <td>78</td>
-              <td>82</td>
-              <td><span class="discount-badge">82</span></td>
-            </tr>
-            <tr class="item-row reveal-row" data-cat="weekly-lite">
-              <td>☞ 3x Weekly Lite</td>
-              <td>54</td>
-              <td>117</td>
-              <td>125</td>
-              <td><span class="discount-badge">125</span></td>
-            </tr>
-            <tr class="item-row reveal-row" data-cat="weekly-lite">
-              <td>☞ 5x Weekly Lite</td>
-              <td>90</td>
-              <td>195</td>
-              <td>205</td>
-              <td><span class="discount-badge">205</span></td>
-            </tr>
+</div>
 
-            <!-- Level Up Pass -->
-            <tr class="category-row reveal-row" data-cat-header="level-up">
-              <td colspan="5">Level Up Pass</td>
-            </tr>
-            <tr class="item-row reveal-row" data-cat="level-up">
-              <td>☞ Level Up-6</td>
-              <td>16</td>
-              <td>36</td>
-              <td>40</td>
-              <td><span class="discount-badge">40</span></td>
-            </tr>
-            <tr class="item-row reveal-row" data-cat="level-up">
-              <td>☞ Level Up-10</td>
-              <td>28</td>
-              <td>64</td>
-              <td class="sell-strike">75</td>
-              <td><span class="discount-badge">72</span></td>
-            </tr>
-            <tr class="item-row reveal-row" data-cat="level-up">
-              <td>☞ Level Up-15</td>
-              <td>28</td>
-              <td>64</td>
-              <td class="sell-strike">75</td>
-              <td><span class="discount-badge">72</span></td>
-            </tr>
-            <tr class="item-row reveal-row" data-cat="level-up">
-              <td>☞ Level Up-20</td>
-              <td>28</td>
-              <td>64</td>
-              <td class="sell-strike">75</td>
-              <td><span class="discount-badge">72</span></td>
-            </tr>
-            <tr class="item-row reveal-row" data-cat="level-up">
-              <td>☞ Level Up-25</td>
-              <td>28</td>
-              <td>64</td>
-              <td class="sell-strike">75</td>
-              <td><span class="discount-badge">72</span></td>
-            </tr>
-            <tr class="item-row reveal-row" data-cat="level-up">
-              <td>☞ Level Up-30</td>
-              <td>40</td>
-              <td>89</td>
-              <td class="sell-strike">105</td>
-              <td><span class="discount-badge">100</span></td>
-            </tr>
-            <tr class="item-row reveal-row" data-cat="level-up">
-              <td>☞ Full Level Up Pass</td>
-              <td>168</td>
-              <td>381</td>
-              <td class="sell-strike">445</td>
-              <td><span class="discount-badge">438</span></td>
-            </tr>
+<section class="price-panel">
 
-            <!-- Evo Access -->
-            <tr class="category-row reveal-row" data-cat-header="evo">
-              <td colspan="5">Evo Access</td>
-            </tr>
-            <tr class="item-row reveal-row" data-cat="evo">
-              <td>☞ Evo 3 Day</td>
-              <td>—</td>
-              <td>00</td>
-              <td>00</td>
-              <td><span class="discount-badge">00</span></td>
-            </tr>
-            <tr class="item-row reveal-row" data-cat="evo">
-              <td>☞ Evo 7 Day</td>
-              <td>—</td>
-              <td>00</td>
-              <td>00</td>
-              <td><span class="discount-badge">00</span></td>
-            </tr>
-            <tr class="item-row reveal-row" data-cat="evo">
-              <td>☞ Evo 14 Day</td>
-              <td>—</td>
-              <td>00</td>
-              <td>00</td>
-              <td><span class="discount-badge">00</span></td>
-            </tr>
-            <tr class="item-row reveal-row" data-cat="evo">
-              <td>☞ Evo 30 Day</td>
-              <td>—</td>
-              <td>00</td>
-              <td>00</td>
-              <td><span class="discount-badge">00</span></td>
-            </tr>
-          </tbody>
-        </table>
+  <h2 class="heading">◈ OFFICIAL PRICE LIST</h2>
 
-        <!-- Empty Search State -->
-        <div id="emptyState" class="hidden py-14 px-4 text-center">
-          <p class="text-lg font-semibold text-gray-300 mb-1">No matching packages found</p>
-          <p class="text-sm text-gray-500">Try searching for another diamond amount or reset your category filter.</p>
-        </div>
-      </div>
-    </main>
+  <div class="search-box">
+    <span class="search-icon">⌕</span>
+    <input
+      id="searchInput"
+      type="text"
+      placeholder="Search your product..."
+    >
+  </div>
 
-    <!-- Footer -->
-    <footer class="text-center mt-12 mb-4">
-      <div class="inline-block px-6 py-3 rounded-2xl glass-panel">
-        <p class="text-xs sm:text-sm text-gray-400 tracking-wide">
-          © 2025 <span class="text-[#39ff5a] font-semibold">SHOTHiK STORE</span> — All Rights Reserved
-        </p>
-      </div>
-    </footer>
+  <!-- ALL FILTERS DISPLAYED TOGETHER -->
+
+  <div class="filters">
+
+    <button class="filter-btn active" data-category="all">ALL</button>
+    <button class="filter-btn" data-category="Diamonds">DIAMONDS</button>
+    <button class="filter-btn" data-category="Weekly Membership">WEEKLY</button>
+    <button class="filter-btn" data-category="Monthly Membership">MONTHLY</button>
+    <button class="filter-btn" data-category="Combo Packs">COMBO</button>
+    <button class="filter-btn" data-category="Weekly Lite">WEEKLY LITE</button>
+    <button class="filter-btn" data-category="Level Up Pass">LEVEL UP</button>
+    <button class="filter-btn" data-category="Evo Access">EVO ACCESS</button>
 
   </div>
 
-  <!-- Quick Copy / Order Details Modal -->
-  <div id="packageModal" class="modal-backdrop fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm">
-    <div class="modal-card glass-panel w-full max-w-md rounded-2xl p-6 border border-[#39ff5a]/40 shadow-[0_0_40px_rgba(57,255,90,0.22)]">
-      <div class="flex items-start justify-between gap-3 mb-4">
-        <div>
-          <span class="text-[11px] font-bold uppercase tracking-widest text-[#39ff5a]" style="font-family:'Orbitron',sans-serif;">Package Details</span>
-          <h3 id="modalTitle" class="text-xl font-bold text-white mt-0.5">Package Name</h3>
-        </div>
-        <button id="closeModalBtn" type="button" class="w-8 h-8 rounded-lg bg-white/5 hover:bg-[#39ff5a]/20 text-gray-300 hover:text-[#39ff5a] flex items-center justify-center transition">
-          ✕
-        </button>
-      </div>
+  <div class="table-scroll">
 
-      <div class="grid grid-cols-2 gap-3 mb-5 text-sm">
-        <div class="p-3 rounded-xl bg-black/40 border border-white/10">
-          <div class="text-gray-400 text-xs">UC / SHELL</div>
-          <div id="modalUc" class="font-bold text-white mt-0.5">—</div>
-        </div>
-        <div class="p-3 rounded-xl bg-black/40 border border-white/10">
-          <div class="text-gray-400 text-xs">Buy Price</div>
-          <div id="modalBuy" class="font-bold text-gray-200 mt-0.5">0</div>
-        </div>
-        <div class="p-3 rounded-xl bg-black/40 border border-white/10">
-          <div class="text-gray-400 text-xs">Sell Price</div>
-          <div id="modalSell" class="font-bold text-gray-300 mt-0.5">0</div>
-        </div>
-        <div class="p-3 rounded-xl bg-[#39ff5a]/10 border border-[#39ff5a]/40">
-          <div class="text-[#39ff5a] text-xs font-semibold">Discount Price</div>
-          <div id="modalDiscount" class="font-extrabold text-[#39ff5a] text-base mt-0.5">0</div>
-        </div>
-      </div>
+    <table>
 
-      <div class="flex gap-3">
-        <button id="copyOrderBtn" type="button" class="flex-1 py-3 px-4 rounded-xl bg-[#39ff5a] hover:bg-[#2ee84d] text-black font-bold text-sm tracking-wide shadow-[0_0_20px_rgba(57,255,90,0.4)] transition cursor-pointer">
-          📋 Copy Order Summary
-        </button>
-      </div>
+      <thead>
+        <tr>
+          <th>DIAMOND LIST</th>
+          <th>UC/SHELL</th>
+          <th>BUY PRICE</th>
+          <th>SELL PRICE</th>
+          <th>DISCOUNT PRICE</th>
+        </tr>
+      </thead>
+
+      <tbody id="priceTable"></tbody>
+
+    </table>
+
+    <div class="empty-message" id="emptyMessage">
+      NO PRODUCTS FOUND
     </div>
+
   </div>
 
-  <!-- Toast Notification -->
-  <div id="toastBanner" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
-    <div class="px-4 py-3 rounded-xl bg-[#0e1911] border border-[#39ff5a] text-white text-sm font-medium shadow-[0_0_25px_rgba(57,255,90,0.4)] flex items-center gap-2.5">
-      <span class="text-[#39ff5a] font-bold">✓</span>
-      <span id="toastMessage">Copied to clipboard!</span>
-    </div>
-  </div>
+</section>
 
-  <script>
-    (function () {
-      /* =========================================================
-         1. LIGHTWEIGHT PARTICLE CANVAS (NEON SPECKS & DIAMONDS)
-      ========================================================= */
-      const canvas = document.getElementById('particle-canvas');
-      const ctx = canvas.getContext('2d');
-      let particles = [];
-      let w = (canvas.width = window.innerWidth);
-      let h = (canvas.height = window.innerHeight);
+<footer>
 
-      function resizeCanvas() {
-        w = canvas.width = window.innerWidth;
-        h = canvas.height = window.innerHeight;
+  <div class="footer-line"></div>
+
+  <strong>SHOTHiK STORE</strong>
+
+  <p>PREMIUM GAMING EXPERIENCE 💎</p>
+
+  <p style="margin-top:12px">
+    © 2025 SHOTHiK STORE — All Rights Reserved
+  </p>
+
+</footer>
+
+</div>
+
+<script>
+
+/* PRODUCT DATABASE - ORIGINAL PRICES */
+
+const products = [
+
+["Diamonds","☞ 25 Diamond","20","20","20","20"],
+["Diamonds","☞ 50 Diamond","36","35","35","35"],
+["Diamonds","☞ 115 Diamond","80","75","79","78"],
+["Diamonds","☞ 240 Diamond","160","150","158","155"],
+["Diamonds","☞ 355 Diamond","160, 80","225","237","232"],
+["Diamonds","☞ 505 Diamond","160, 160, 20","320","336","330"],
+["Diamonds","☞ 610 Diamond","405","380","400","395"],
+["Diamonds","☞ 850 Diamond","405, 160","530","558","552"],
+["Diamonds","☞ 1090 Diamond","405, 160, 160","680","716","710"],
+["Diamonds","☞ 1240 Diamond","810","758","800","790"],
+["Diamonds","☞ 2090 Diamond","810, 405, 160","1288","1358","1350"],
+["Diamonds","☞ 2530 Diamond","1625","1521","1610","1595"],
+["Diamonds","☞ 5060 Diamond","1625, 1625","3042","3220","3190"],
+["Diamonds","☞ 10120 Diamond","1625, 1625, 1625, 1625","6084","6440","6390"],
+
+["Weekly Membership","☞ 1x Weekly","161","151","158","156"],
+["Weekly Membership","☞ 2x Weekly","161, 161","302","316","312"],
+["Weekly Membership","☞ 3x Weekly","161, 161, 161","453","474","468"],
+["Weekly Membership","☞ 5x Weekly","161, 161, 161, 161, 161","755","790","780"],
+
+["Monthly Membership","☞ 1x Monthly","800","749","790","775"],
+["Monthly Membership","☞ 2x Monthly","800, 800","1498","1580","1550"],
+
+["Combo Packs","☞ 1x Weekly-1x Monthly","161, 800","900","948","932"],
+["Combo Packs","☞ 4x Weekly-1x Monthly","161, 161, 161, 161, 800","1353","1422","1400"],
+["Combo Packs","☞ 5x Weekly-1x Monthly","161, 161, 161, 161, 161, 800","1504","1580","1555"],
+
+["Weekly Lite","☞ 1x Weekly Lite","18","39","42","41"],
+["Weekly Lite","☞ 2x Weekly Lite","36","78","82","82"],
+["Weekly Lite","☞ 3x Weekly Lite","54","117","125","125"],
+["Weekly Lite","☞ 5x Weekly Lite","90","195","205","205"],
+
+["Level Up Pass","☞ Level Up-6","16","36","40","40"],
+["Level Up Pass","☞ Level Up-10","28","64","75","72"],
+["Level Up Pass","☞ Level Up-15","28","64","75","72"],
+["Level Up Pass","☞ Level Up-20","28","64","75","72"],
+["Level Up Pass","☞ Level Up-25","28","64","75","72"],
+["Level Up Pass","☞ Level Up-30","40","89","105","100"],
+["Level Up Pass","☞ Full Level Up Pass","168","381","445","438"],
+
+["Evo Access","☞ Evo 3 Day","","00","00","00"],
+["Evo Access","☞ Evo 7 Day","","00","00","00"],
+["Evo Access","☞ Evo 14 Day","","00","00","00"],
+["Evo Access","☞ Evo 30 Day","","00","00","00"]
+
+];
+
+/* FILTER AND SEARCH */
+
+const table = document.getElementById("priceTable");
+const search = document.getElementById("searchInput");
+const empty = document.getElementById("emptyMessage");
+
+let activeCategory = "all";
+
+function renderProducts() {
+
+  const query = search.value.toLowerCase().trim();
+
+  const filtered = products.filter(p => {
+
+    const categoryMatch =
+      activeCategory === "all" || p[0] === activeCategory;
+
+    const searchMatch =
+      p.join(" ").toLowerCase().includes(query);
+
+    return categoryMatch && searchMatch;
+
+  });
+
+  table.innerHTML = "";
+
+  let lastCategory = "";
+
+  filtered.forEach(p => {
+
+    if (activeCategory === "all" && lastCategory !== p[0]) {
+
+      lastCategory = p[0];
+
+      const heading = document.createElement("tr");
+      heading.className = "category-row";
+
+      const cell = document.createElement("td");
+      cell.colSpan = 5;
+      cell.textContent = "◈ " + p[0].toUpperCase();
+
+      heading.appendChild(cell);
+      table.appendChild(heading);
+
+    }
+
+    const row = document.createElement("tr");
+
+    p.slice(1).forEach(value => {
+
+      const cell = document.createElement("td");
+      cell.textContent = value;
+      row.appendChild(cell);
+
+    });
+
+    table.appendChild(row);
+
+  });
+
+  empty.style.display = filtered.length ? "none" : "block";
+
+}
+
+document.querySelectorAll(".filter-btn").forEach(button => {
+
+  button.addEventListener("click", () => {
+
+    document.querySelectorAll(".filter-btn").forEach(b =>
+      b.classList.remove("active")
+    );
+
+    button.classList.add("active");
+
+    activeCategory = button.dataset.category;
+
+    renderProducts();
+
+  });
+
+});
+
+search.addEventListener("input", renderProducts);
+
+renderProducts();
+
+/* PARTICLE ANIMATION */
+
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+
+let particles = [];
+let w, h;
+
+function resize() {
+
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+  w = window.innerWidth;
+  h = window.innerHeight;
+
+  canvas.width = w * dpr;
+  canvas.height = h * dpr;
+
+  canvas.style.width = w + "px";
+  canvas.style.height = h + "px";
+
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+  particles = Array.from(
+    {length: Math.min(80, Math.floor(w / 12))},
+    () => ({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      dx: (Math.random() - .5) * .5,
+      dy: (Math.random() - .5) * .5,
+      r: Math.random() * 2 + .5
+    })
+  );
+
+}
+
+function animate() {
+
+  ctx.clearRect(0, 0, w, h);
+
+  particles.forEach((p, i) => {
+
+    p.x += p.dx;
+    p.y += p.dy;
+
+    if (p.x < 0 || p.x > w) p.dx *= -1;
+    if (p.y < 0 || p.y > h) p.dy *= -1;
+
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = "#39ff75";
+    ctx.shadowBlur = 10;
+    ctx.shadowColor = "#39ff75";
+    ctx.fill();
+    ctx.shadowBlur = 0;
+
+    for (let j = i + 1; j < particles.length; j++) {
+
+      const q = particles[j];
+
+      const dx = p.x - q.x;
+      const dy = p.y - q.y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+
+      if (distance < 100) {
+
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y);
+        ctx.lineTo(q.x, q.y);
+
+        ctx.strokeStyle =
+          `rgba(57,255,117,${.12 * (1-distance/100)})`;
+
+        ctx.stroke();
+
       }
-      window.addEventListener('resize', resizeCanvas);
 
-      class Particle {
-        constructor() {
-          this.reset(true);
-        }
-        reset(initial = false) {
-          this.x = Math.random() * w;
-          this.y = initial ? Math.random() * h : h + 15;
-          this.size = Math.random() * 2.4 + 1;
-          this.speedY = -(Math.random() * 0.45 + 0.15);
-          this.speedX = (Math.random() - 0.5) * 0.25;
-          this.alpha = Math.random() * 0.55 + 0.15;
-          this.isDiamond = Math.random() > 0.72;
-        }
-        update() {
-          this.y += this.speedY;
-          this.x += this.speedX;
-          if (this.y < -15 || this.x < -15 || this.x > w + 15) {
-            this.reset(false);
-          }
-        }
-        draw() {
-          ctx.save();
-          ctx.globalAlpha = this.alpha;
-          ctx.fillStyle = '#39ff5a';
-          ctx.shadowBlur = 8;
-          ctx.shadowColor = '#39ff5a';
+    }
 
-          if (this.isDiamond) {
-            ctx.translate(this.x, this.y);
-            ctx.rotate(Math.PI / 4);
-            ctx.fillRect(-this.size, -this.size, this.size * 2, this.size * 2);
-          } else {
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fill();
-          }
-          ctx.restore();
-        }
-      }
+  });
 
-      const particleCount = Math.min(48, Math.floor((w * h) / 26000));
-      for (let i = 0; i < particleCount; i++) {
-        particles.push(new Particle());
-      }
+  if (!window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches) {
+    requestAnimationFrame(animate);
+  }
 
-      function animateParticles() {
-        ctx.clearRect(0, 0, w, h);
-        for (let i = 0; i < particles.length; i++) {
-          particles[i].update();
-          particles[i].draw();
-        }
-        requestAnimationFrame(animateParticles);
-      }
-      animateParticles();
+}
 
-      /* =========================================================
-         2. TABLE MOUSE SPOTLIGHT EFFECT
-      ========================================================= */
-      const spotlight = document.getElementById('tableSpotlight');
-      spotlight.addEventListener('mousemove', (e) => {
-        const rect = spotlight.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        spotlight.style.setProperty('--mouse-x', `${x}px`);
-        spotlight.style.setProperty('--mouse-y', `${y}px`);
-      });
+window.addEventListener("resize", resize);
 
-      /* =========================================================
-         3. INTERSECTION OBSERVER STAGGERED ROW REVEAL
-      ========================================================= */
-      const revealRows = document.querySelectorAll('.reveal-row');
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry, idx) => {
-            if (entry.isIntersecting) {
-              setTimeout(() => {
-                entry.target.classList.add('visible');
-              }, (idx % 8) * 35);
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        { threshold: 0.06 }
-      );
-      revealRows.forEach((row) => observer.observe(row));
+resize();
+animate();
 
-      /* =========================================================
-         4. CATEGORY FILTERING & LIVE SEARCH
-      ========================================================= */
-      const categoryTabs = document.querySelectorAll('.filter-pill');
-      const searchInput = document.getElementById('searchInput');
-      const clearSearchBtn = document.getElementById('clearSearchBtn');
-      const itemRows = document.querySelectorAll('tr.item-row');
-      const categoryHeaders = document.querySelectorAll('tr.category-row');
-      const emptyState = document.getElementById('emptyState');
-      const visibleCountBadge = document.getElementById('visibleCountBadge');
+</script>
 
-      let activeCategory = 'all';
-
-      function filterTable() {
-        const query = searchInput.value.trim().toLowerCase();
-        clearSearchBtn.style.display = query.length > 0 ? 'flex' : 'none';
-
-        let visibleItems = 0;
-        const activeCategoriesWithVisibleItems = new Set();
-
-        itemRows.forEach((row) => {
-          const cat = row.getAttribute('data-cat');
-          const text = row.textContent.toLowerCase();
-          const matchesCat = activeCategory === 'all' || cat === activeCategory;
-          const matchesQuery = query === '' || text.includes(query);
-
-          if (matchesCat && matchesQuery) {
-            row.style.display = '';
-            row.classList.add('visible');
-            visibleItems++;
-            activeCategoriesWithVisibleItems.add(cat);
-          } else {
-            row.style.display = 'none';
-          }
-        });
-
-        categoryHeaders.forEach((header) => {
-          const headerCat = header.getAttribute('data-cat-header');
-          const shouldShow =
-            (activeCategory === 'all' || activeCategory === headerCat) &&
-            activeCategoriesWithVisibleItems.has(headerCat);
-          header.style.display = shouldShow ? '' : 'none';
-          if (shouldShow) header.classList.add('visible');
-        });
-
-        visibleCountBadge.textContent = `${visibleItems} ${visibleItems === 1 ? 'Pack' : 'Packs'}`;
-        emptyState.classList.toggle('hidden', visibleItems > 0);
-      }
-
-      categoryTabs.forEach((btn) => {
-        btn.addEventListener('click', () => {
-          categoryTabs.forEach((b) => b.classList.remove('active'));
-          btn.classList.add('active');
-          activeCategory = btn.getAttribute('data-category');
-          filterTable();
-        });
-      });
-
-      searchInput.addEventListener('input', filterTable);
-      clearSearchBtn.addEventListener('click', () => {
-        searchInput.value = '';
-        filterTable();
-        searchInput.focus();
-      });
-
-      /* =========================================================
-         5. QUICK ORDER MODAL & CLIPBOARD COPY
-      ========================================================= */
-      const modal = document.getElementById('packageModal');
-      const closeModalBtn = document.getElementById('closeModalBtn');
-      const copyOrderBtn = document.getElementById('copyOrderBtn');
-      const toastBanner = document.getElementById('toastBanner');
-      const toastMessage = document.getElementById('toastMessage');
-
-      let currentSelectionText = '';
-      let toastTimeout;
-
-      function showToast(msg) {
-        toastMessage.textContent = msg;
-        toastBanner.classList.remove('translate-y-20', 'opacity-0');
-        clearTimeout(toastTimeout);
-        toastTimeout = setTimeout(() => {
-          toastBanner.classList.add('translate-y-20', 'opacity-0');
-        }, 2600);
-      }
-
-      itemRows.forEach((row) => {
-        row.addEventListener('click', () => {
-          const cells = row.querySelectorAll('td');
-          const name = cells[0].textContent.replace('☞', '').trim();
-          const uc = cells[1].textContent.trim();
-          const buy = cells[2].textContent.trim();
-          const sell = cells[3].textContent.trim();
-          const discount = cells[4].textContent.trim();
-
-          document.getElementById('modalTitle').textContent = name;
-          document.getElementById('modalUc').textContent = uc || '—';
-          document.getElementById('modalBuy').textContent = buy;
-          document.getElementById('modalSell').textContent = sell;
-          document.getElementById('modalDiscount').textContent = discount;
-
-          currentSelectionText = `SHOTHiK STORE Order:\n• Package: ${name}\n• UC/SHELL: ${uc}\n• Discount Price: ${discount}`;
-          modal.classList.add('open');
-        });
-      });
-
-      function closeModal() {
-        modal.classList.remove('open');
-      }
-
-      closeModalBtn.addEventListener('click', closeModal);
-      modal.addEventListener('click', (e) => {
-        if (e.target === modal) closeModal();
-      });
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closeModal();
-      });
-
-      copyOrderBtn.addEventListener('click', () => {
-        const tempArea = document.createElement('textarea');
-        tempArea.value = currentSelectionText;
-        document.body.appendChild(tempArea);
-        tempArea.select();
-        try {
-          document.execCommand('copy');
-          showToast('Order summary copied to clipboard!');
-        } catch (err) {
-          showToast('Unable to copy automatically.');
-        }
-        document.body.removeChild(tempArea);
-        closeModal();
-      });
-    })();
-  </script>
 </body>
 </html>
