@@ -5,15 +5,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#050908">
-<title>SHOTHiK STORE</title>
+<title>SHOTHiK STORE | Premium Gaming Shop</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800&family=Rajdhani:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Rajdhani:wght@400;500;600;700&display=swap');
 
 :root {
   --neon: #39ff75;
+  --neon2: #00ffa3;
   --bg: #050908;
-  --glass: rgba(15,30,23,.85);
+  --glass: rgba(15,30,23,.82);
   --border: rgba(57,255,117,.25);
 }
 
@@ -38,6 +39,8 @@ body {
   overflow-x: hidden;
 }
 
+/* BACKGROUND PARTICLES */
+
 #particles {
   position: fixed;
   inset: 0;
@@ -49,17 +52,49 @@ body {
 
 .glow {
   position: fixed;
-  width: 300px;
-  height: 300px;
-  background: #39ff7525;
+  width: 350px;
+  height: 350px;
   border-radius: 50%;
-  filter: blur(100px);
+  filter: blur(110px);
   z-index: -1;
   pointer-events: none;
+  opacity: .16;
+  animation: glowMove 12s infinite alternate ease-in-out;
 }
 
-.glow.one { top: -100px; left: -100px; }
-.glow.two { bottom: -100px; right: -100px; }
+.glow-one {
+  background: #00ff66;
+  top: -150px;
+  left: -150px;
+}
+
+.glow-two {
+  background: #00d9ff;
+  bottom: -150px;
+  right: -150px;
+  animation-delay: 3s;
+}
+
+@keyframes glowMove {
+  to {
+    transform: translate(80px,80px) scale(1.2);
+  }
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: .10;
+  background-image:
+    linear-gradient(rgba(57,255,117,.1) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(57,255,117,.1) 1px,transparent 1px);
+  background-size: 45px 45px;
+}
+
+/* MAIN CONTAINER */
 
 .container {
   width: 100%;
@@ -68,110 +103,187 @@ body {
   padding: 15px;
 }
 
-/* HEADER */
+/* LOGO SECTION */
 
 header {
   text-align: center;
-  padding: 40px 10px 25px;
+  padding: 45px 10px 30px;
 }
+
+/* ROUND LOGO */
 
 .logo-frame {
-  display: inline-block;
-  padding: 10px;
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  background: var(--glass);
-  box-shadow: 0 0 30px #39ff7520;
+  width: 175px;
+  height: 175px;
+  margin: auto;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: #050908;
+  border: 2px solid var(--neon);
+
+  box-shadow:
+    0 0 15px var(--neon),
+    0 0 35px #39ff7580,
+    inset 0 0 20px #39ff7530;
 }
+
+/* FIRST ROTATING RING */
+
+.logo-frame::before {
+  content: "";
+  position: absolute;
+  inset: -10px;
+  border-radius: 50%;
+  border: 2px dashed var(--neon);
+  animation: logoSpin 8s linear infinite;
+}
+
+/* SECOND ROTATING RING */
+
+.logo-frame::after {
+  content: "";
+  position: absolute;
+  inset: -19px;
+  border-radius: 50%;
+  border: 1px solid #39ff7580;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  animation: logoSpin 5s linear infinite reverse;
+}
+
+/* LOGO IMAGE */
 
 .logo-frame img {
-  width: 170px;
-  max-width: 70vw;
-  display: block;
-  animation: float 4s infinite ease-in-out;
-  filter: drop-shadow(0 0 15px #39ff7580);
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  animation: logoSpin 15s linear infinite;
+
+  filter: drop-shadow(0 0 12px #39ff75);
 }
 
-@keyframes float {
-  50% { transform: translateY(-8px); }
+@keyframes logoSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
+
+/* STORE TITLE */
 
 .store-name {
-  margin-top: 22px;
+  margin-top: 35px;
   font-family: 'Orbitron', sans-serif;
-  font-size: clamp(25px, 5vw, 46px);
+  font-size: clamp(27px,5vw,46px);
   font-weight: 800;
   letter-spacing: 4px;
   color: var(--neon);
-  text-shadow: 0 0 15px #39ff75;
+
+  text-shadow:
+    0 0 10px #39ff75,
+    0 0 30px #39ff7580;
 }
 
 .subtitle {
-  color: #aaa;
-  margin-top: 10px;
+  margin-top: 12px;
+  color: #b5c5ba;
   font-size: 17px;
   letter-spacing: 2px;
 }
 
 .status {
-  display: inline-block;
-  margin-top: 18px;
-  padding: 7px 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 20px;
+  padding: 8px 18px;
   border: 1px solid var(--border);
   border-radius: 30px;
-  color: var(--neon);
   background: #39ff7510;
+  color: var(--neon);
   font-size: 13px;
   letter-spacing: 1px;
 }
 
-/* STATS */
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--neon);
+  border-radius: 50%;
+  box-shadow: 0 0 12px var(--neon);
+  animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+  50% { opacity: .3; }
+}
+
+/* STATISTICS */
 
 .stats {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(3,minmax(0,1fr));
   gap: 12px;
-  margin: 20px 0 25px;
+  margin: 20px 0 30px;
 }
 
 .stat-card {
-  padding: 17px 5px;
+  padding: 18px 5px;
   text-align: center;
   background: var(--glass);
   border: 1px solid var(--border);
-  border-radius: 14px;
+  border-radius: 15px;
   backdrop-filter: blur(15px);
+  transition: .3s;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px #39ff7520;
 }
 
 .stat-card strong {
   display: block;
-  font-family: 'Orbitron', sans-serif;
-  font-size: 22px;
   color: var(--neon);
+  font-family: 'Orbitron',sans-serif;
+  font-size: 23px;
 }
 
 .stat-card span {
+  color: #9aada1;
   font-size: 13px;
-  color: #aaa;
+  letter-spacing: 1px;
 }
 
-/* MAIN PRICE PANEL */
+/* PRICE PANEL */
 
 .price-panel {
   width: 100%;
-  padding: 20px;
+  padding: 22px;
   background: var(--glass);
   border: 1px solid var(--border);
   border-radius: 20px;
-  backdrop-filter: blur(15px);
-  box-shadow: 0 0 30px #39ff7510;
+  backdrop-filter: blur(20px);
+
+  box-shadow:
+    0 10px 40px #0008,
+    0 0 25px #39ff7510;
+
+  animation: fadeUp 1s ease;
 }
 
 .heading {
-  font-family: 'Orbitron', sans-serif;
+  margin-bottom: 20px;
+  font-family: 'Orbitron',sans-serif;
   font-size: 19px;
   color: var(--neon);
-  margin-bottom: 20px;
   letter-spacing: 1px;
 }
 
@@ -179,12 +291,12 @@ header {
 
 .search-box {
   position: relative;
-  margin-bottom: 18px;
+  margin-bottom: 20px;
 }
 
 .search-box input {
   width: 100%;
-  padding: 13px 15px 13px 42px;
+  padding: 14px 15px 14px 45px;
   border-radius: 10px;
   background: #080e0b;
   border: 1px solid var(--border);
@@ -192,38 +304,38 @@ header {
   outline: none;
   font-family: inherit;
   font-size: 16px;
+  transition: .3s;
 }
 
 .search-box input:focus {
   border-color: var(--neon);
-  box-shadow: 0 0 12px #39ff7530;
+  box-shadow: 0 0 15px #39ff7520;
 }
 
 .search-icon {
   position: absolute;
-  left: 14px;
+  left: 15px;
   top: 10px;
-  font-size: 20px;
+  font-size: 22px;
   color: var(--neon);
 }
 
-/* FILTERS - NO SLIDER */
+/* CATEGORY FILTERS */
 
 .filters {
   display: flex;
   flex-wrap: wrap;
+  gap: 9px;
   width: 100%;
-  gap: 8px;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 }
 
 .filter-btn {
-  flex: 0 0 auto;
-  padding: 9px 13px;
+  padding: 10px 15px;
   border: 1px solid var(--border);
   border-radius: 8px;
   background: #101a14;
-  color: #ccc;
+  color: #c5d1c9;
   font-family: inherit;
   font-size: 14px;
   font-weight: 700;
@@ -235,16 +347,17 @@ header {
 .filter-btn.active {
   background: var(--neon);
   color: #031008;
+  border-color: var(--neon);
   box-shadow: 0 0 15px #39ff7550;
 }
 
-/* TABLE */
+/* PRICE TABLE */
 
 .table-scroll {
   width: 100%;
-  overflow-x: auto;
-  border-radius: 10px;
-  border: 1px solid #39ff7520;
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid #39ff7525;
 }
 
 table {
@@ -254,72 +367,114 @@ table {
 }
 
 thead {
-  background: var(--neon);
-  color: black;
+  background: linear-gradient(90deg,#39ff75,#00d98a);
+  color: #031008;
 }
 
 th {
-  padding: 13px 5px;
-  font-family: 'Orbitron', sans-serif;
+  padding: 15px 5px;
+  font-family: 'Orbitron',sans-serif;
   font-size: 11px;
   overflow-wrap: anywhere;
 }
 
 td {
-  padding: 12px 5px;
+  padding: 13px 5px;
   text-align: center;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
-  border-bottom: 1px solid #ffffff12;
+  color: #dce8e0;
+  border-bottom: 1px solid #ffffff10;
   overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+tbody tr:not(.category-row) {
+  transition: .25s;
+  animation: rowAppear .35s ease both;
 }
 
 tbody tr:not(.category-row):hover {
   background: #39ff7515;
 }
 
+tbody tr:not(.category-row):hover td:first-child {
+  color: var(--neon);
+}
+
 tbody tr:not(.category-row) td:last-child {
   color: var(--neon);
 }
 
+/* CATEGORY HEADINGS */
+
 .category-row td {
-  padding: 13px;
+  padding: 15px 10px;
   background: #39ff7515;
   color: var(--neon);
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'Orbitron',sans-serif;
   font-size: 13px;
   letter-spacing: 1px;
+  border-top: 1px solid var(--border);
 }
+
+/* EMPTY SEARCH */
 
 .empty-message {
   display: none;
-  padding: 30px;
+  padding: 35px 10px;
   text-align: center;
   color: var(--neon);
+  font-family: 'Orbitron',sans-serif;
 }
 
 /* FOOTER */
 
 footer {
-  padding: 35px 10px 20px;
   text-align: center;
-  color: #777;
+  padding: 35px 10px 20px;
+  color: #78877e;
+  font-size: 14px;
+}
+
+.footer-line {
+  width: 90px;
+  height: 2px;
+  margin: 0 auto 20px;
+  background: var(--neon);
+  box-shadow: 0 0 15px var(--neon);
 }
 
 footer strong {
   color: var(--neon);
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'Orbitron',sans-serif;
 }
 
-.footer-line {
-  width: 80px;
-  height: 2px;
-  background: var(--neon);
-  margin: 0 auto 18px;
-  box-shadow: 0 0 10px var(--neon);
+/* ANIMATIONS */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* MOBILE */
+@keyframes rowAppear {
+  from {
+    opacity: 0;
+    transform: translateY(7px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* MOBILE RESPONSIVE */
 
 @media(max-width:600px) {
 
@@ -328,15 +483,29 @@ footer strong {
   }
 
   header {
-    padding-top: 25px;
+    padding-top: 30px;
+  }
+
+  .logo-frame {
+    width: 145px;
+    height: 145px;
   }
 
   .store-name {
+    font-size: 27px;
     letter-spacing: 2px;
+  }
+
+  .subtitle {
+    font-size: 13px;
   }
 
   .stats {
     gap: 7px;
+  }
+
+  .stat-card {
+    padding: 14px 4px;
   }
 
   .stat-card strong {
@@ -344,7 +513,7 @@ footer strong {
   }
 
   .stat-card span {
-    font-size: 11px;
+    font-size: 10px;
   }
 
   .price-panel {
@@ -365,18 +534,22 @@ footer strong {
   }
 
   th {
-    font-size: 9px;
     padding: 10px 3px;
+    font-size: 9px;
   }
 
   td {
-    font-size: 12px;
     padding: 10px 3px;
+    font-size: 12px;
+  }
+
+  .category-row td {
+    font-size: 12px;
   }
 }
 
 @media(prefers-reduced-motion:reduce) {
-  *, *::before, *::after {
+  *,*::before,*::after {
     animation: none !important;
     transition: none !important;
   }
@@ -388,24 +561,36 @@ footer strong {
 
 <canvas id="particles"></canvas>
 
-<div class="glow one"></div>
-<div class="glow two"></div>
+<div class="glow glow-one"></div>
+<div class="glow glow-two"></div>
 
 <div class="container">
 
+<!-- HEADER -->
+
 <header>
 
+  <!-- LOGO -->
+  <!-- Save your uploaded reference image as logo.png -->
+
   <div class="logo-frame">
-    <img src="logo.jpg" alt="SHOTHiK STORE">
+    <img src="logo.png" alt="SHOTHiK STORE Logo">
   </div>
 
   <h1 class="store-name">SHOTHiK STORE</h1>
 
-  <p class="subtitle">PREMIUM DIAMOND & MEMBERSHIP SHOP 💎</p>
+  <p class="subtitle">
+    PREMIUM DIAMOND & MEMBERSHIP SHOP 💎
+  </p>
 
-  <div class="status">● PREMIUM GAMING STORE</div>
+  <div class="status">
+    <span class="status-dot"></span>
+    PREMIUM GAMING STORE
+  </div>
 
 </header>
+
+<!-- STATISTICS -->
 
 <div class="stats">
 
@@ -415,7 +600,7 @@ footer strong {
   </div>
 
   <div class="stat-card">
-    <strong>08</strong>
+    <strong>07</strong>
     <span>CATEGORIES</span>
   </div>
 
@@ -426,33 +611,66 @@ footer strong {
 
 </div>
 
+<!-- PRICE LIST -->
+
 <section class="price-panel">
 
-  <h2 class="heading">◈ OFFICIAL PRICE LIST</h2>
+  <h2 class="heading">
+    ◈ OFFICIAL PRICE LIST
+  </h2>
+
+  <!-- SEARCH -->
 
   <div class="search-box">
     <span class="search-icon">⌕</span>
+
     <input
-      id="searchInput"
       type="text"
-      placeholder="Search your product..."
+      id="searchInput"
+      placeholder="Search diamonds, membership or products..."
+      autocomplete="off"
     >
   </div>
 
-  <!-- ALL FILTERS DISPLAYED TOGETHER -->
+  <!-- CATEGORY FILTERS -->
 
   <div class="filters">
 
-    <button class="filter-btn active" data-category="all">ALL</button>
-    <button class="filter-btn" data-category="Diamonds">DIAMONDS</button>
-    <button class="filter-btn" data-category="Weekly Membership">WEEKLY</button>
-    <button class="filter-btn" data-category="Monthly Membership">MONTHLY</button>
-    <button class="filter-btn" data-category="Combo Packs">COMBO</button>
-    <button class="filter-btn" data-category="Weekly Lite">WEEKLY LITE</button>
-    <button class="filter-btn" data-category="Level Up Pass">LEVEL UP</button>
-    <button class="filter-btn" data-category="Evo Access">EVO ACCESS</button>
+    <button class="filter-btn active" data-category="all">
+      ALL
+    </button>
+
+    <button class="filter-btn" data-category="Diamonds">
+      DIAMONDS
+    </button>
+
+    <button class="filter-btn" data-category="Weekly Membership">
+      WEEKLY
+    </button>
+
+    <button class="filter-btn" data-category="Monthly Membership">
+      MONTHLY
+    </button>
+
+    <button class="filter-btn" data-category="Combo Packs">
+      COMBO
+    </button>
+
+    <button class="filter-btn" data-category="Weekly Lite">
+      WEEKLY LITE
+    </button>
+
+    <button class="filter-btn" data-category="Level Up Pass">
+      LEVEL UP
+    </button>
+
+    <button class="filter-btn" data-category="Evo Access">
+      EVO ACCESS
+    </button>
 
   </div>
+
+  <!-- PRODUCT TABLE -->
 
   <div class="table-scroll">
 
@@ -480,15 +698,19 @@ footer strong {
 
 </section>
 
+<!-- FOOTER -->
+
 <footer>
 
   <div class="footer-line"></div>
 
   <strong>SHOTHiK STORE</strong>
 
-  <p>PREMIUM GAMING EXPERIENCE 💎</p>
+  <p style="margin-top:10px;">
+    PREMIUM GAMING EXPERIENCE 💎
+  </p>
 
-  <p style="margin-top:12px">
+  <p style="margin-top:12px;">
     © 2025 SHOTHiK STORE — All Rights Reserved
   </p>
 
@@ -498,76 +720,99 @@ footer strong {
 
 <script>
 
-/* PRODUCT DATABASE - ORIGINAL PRICES */
+/* ====================================
+   PRODUCT DATABASE
+   ALL ORIGINAL PRICES PRESERVED
+==================================== */
 
 const products = [
 
-["Diamonds","☞ 25 Diamond","20","20","20","20"],
-["Diamonds","☞ 50 Diamond","36","35","35","35"],
-["Diamonds","☞ 115 Diamond","80","75","79","78"],
-["Diamonds","☞ 240 Diamond","160","150","158","155"],
-["Diamonds","☞ 355 Diamond","160, 80","225","237","232"],
-["Diamonds","☞ 505 Diamond","160, 160, 20","320","336","330"],
-["Diamonds","☞ 610 Diamond","405","380","400","395"],
-["Diamonds","☞ 850 Diamond","405, 160","530","558","552"],
-["Diamonds","☞ 1090 Diamond","405, 160, 160","680","716","710"],
-["Diamonds","☞ 1240 Diamond","810","758","800","790"],
-["Diamonds","☞ 2090 Diamond","810, 405, 160","1288","1358","1350"],
-["Diamonds","☞ 2530 Diamond","1625","1521","1610","1595"],
-["Diamonds","☞ 5060 Diamond","1625, 1625","3042","3220","3190"],
-["Diamonds","☞ 10120 Diamond","1625, 1625, 1625, 1625","6084","6440","6390"],
+  // DIAMONDS
 
-["Weekly Membership","☞ 1x Weekly","161","151","158","156"],
-["Weekly Membership","☞ 2x Weekly","161, 161","302","316","312"],
-["Weekly Membership","☞ 3x Weekly","161, 161, 161","453","474","468"],
-["Weekly Membership","☞ 5x Weekly","161, 161, 161, 161, 161","755","790","780"],
+  ["Diamonds","☞ 25 Diamond","20","20","20","20"],
+  ["Diamonds","☞ 50 Diamond","36","35","35","35"],
+  ["Diamonds","☞ 115 Diamond","80","75","79","78"],
+  ["Diamonds","☞ 240 Diamond","160","150","158","155"],
+  ["Diamonds","☞ 355 Diamond","160, 80","225","237","232"],
+  ["Diamonds","☞ 505 Diamond","160, 160, 20","320","336","330"],
+  ["Diamonds","☞ 610 Diamond","405","380","400","395"],
+  ["Diamonds","☞ 850 Diamond","405, 160","530","558","552"],
+  ["Diamonds","☞ 1090 Diamond","405, 160, 160","680","716","710"],
+  ["Diamonds","☞ 1240 Diamond","810","758","800","790"],
+  ["Diamonds","☞ 2090 Diamond","810, 405, 160","1288","1358","1350"],
+  ["Diamonds","☞ 2530 Diamond","1625","1521","1610","1595"],
+  ["Diamonds","☞ 5060 Diamond","1625, 1625","3042","3220","3190"],
+  ["Diamonds","☞ 10120 Diamond","1625, 1625, 1625, 1625","6084","6440","6390"],
 
-["Monthly Membership","☞ 1x Monthly","800","749","790","775"],
-["Monthly Membership","☞ 2x Monthly","800, 800","1498","1580","1550"],
+  // WEEKLY MEMBERSHIP
 
-["Combo Packs","☞ 1x Weekly-1x Monthly","161, 800","900","948","932"],
-["Combo Packs","☞ 4x Weekly-1x Monthly","161, 161, 161, 161, 800","1353","1422","1400"],
-["Combo Packs","☞ 5x Weekly-1x Monthly","161, 161, 161, 161, 161, 800","1504","1580","1555"],
+  ["Weekly Membership","☞ 1x Weekly","161","151","158","156"],
+  ["Weekly Membership","☞ 2x Weekly","161, 161","302","316","312"],
+  ["Weekly Membership","☞ 3x Weekly","161, 161, 161","453","474","468"],
+  ["Weekly Membership","☞ 5x Weekly","161, 161, 161, 161, 161","755","790","780"],
 
-["Weekly Lite","☞ 1x Weekly Lite","18","39","42","41"],
-["Weekly Lite","☞ 2x Weekly Lite","36","78","82","82"],
-["Weekly Lite","☞ 3x Weekly Lite","54","117","125","125"],
-["Weekly Lite","☞ 5x Weekly Lite","90","195","205","205"],
+  // MONTHLY MEMBERSHIP
 
-["Level Up Pass","☞ Level Up-6","16","36","40","40"],
-["Level Up Pass","☞ Level Up-10","28","64","75","72"],
-["Level Up Pass","☞ Level Up-15","28","64","75","72"],
-["Level Up Pass","☞ Level Up-20","28","64","75","72"],
-["Level Up Pass","☞ Level Up-25","28","64","75","72"],
-["Level Up Pass","☞ Level Up-30","40","89","105","100"],
-["Level Up Pass","☞ Full Level Up Pass","168","381","445","438"],
+  ["Monthly Membership","☞ 1x Monthly","800","749","790","775"],
+  ["Monthly Membership","☞ 2x Monthly","800, 800","1498","1580","1550"],
 
-["Evo Access","☞ Evo 3 Day","","00","00","00"],
-["Evo Access","☞ Evo 7 Day","","00","00","00"],
-["Evo Access","☞ Evo 14 Day","","00","00","00"],
-["Evo Access","☞ Evo 30 Day","","00","00","00"]
+  // COMBO PACKS
+
+  ["Combo Packs","☞ 1x Weekly-1x Monthly","161, 800","900","948","932"],
+  ["Combo Packs","☞ 4x Weekly-1x Monthly","161, 161, 161, 161, 800","1353","1422","1400"],
+  ["Combo Packs","☞ 5x Weekly-1x Monthly","161, 161, 161, 161, 161, 800","1504","1580","1555"],
+
+  // WEEKLY LITE
+
+  ["Weekly Lite","☞ 1x Weekly Lite","18","39","42","41"],
+  ["Weekly Lite","☞ 2x Weekly Lite","36","78","82","82"],
+  ["Weekly Lite","☞ 3x Weekly Lite","54","117","125","125"],
+  ["Weekly Lite","☞ 5x Weekly Lite","90","195","205","205"],
+
+  // LEVEL UP PASS
+
+  ["Level Up Pass","☞ Level Up-6","16","36","40","40"],
+  ["Level Up Pass","☞ Level Up-10","28","64","75","72"],
+  ["Level Up Pass","☞ Level Up-15","28","64","75","72"],
+  ["Level Up Pass","☞ Level Up-20","28","64","75","72"],
+  ["Level Up Pass","☞ Level Up-25","28","64","75","72"],
+  ["Level Up Pass","☞ Level Up-30","40","89","105","100"],
+  ["Level Up Pass","☞ Full Level Up Pass","168","381","445","438"],
+
+  // EVO ACCESS
+
+  ["Evo Access","☞ Evo 3 Day","","00","00","00"],
+  ["Evo Access","☞ Evo 7 Day","","00","00","00"],
+  ["Evo Access","☞ Evo 14 Day","","00","00","00"],
+  ["Evo Access","☞ Evo 30 Day","","00","00","00"]
 
 ];
 
-/* FILTER AND SEARCH */
+/* ====================================
+   PRODUCT FILTER AND SEARCH
+==================================== */
 
 const table = document.getElementById("priceTable");
-const search = document.getElementById("searchInput");
-const empty = document.getElementById("emptyMessage");
+const searchInput = document.getElementById("searchInput");
+const emptyMessage = document.getElementById("emptyMessage");
 
-let activeCategory = "all";
+let selectedCategory = "all";
+
+document.getElementById("productCount").textContent =
+  products.length;
 
 function renderProducts() {
 
-  const query = search.value.toLowerCase().trim();
+  const query = searchInput.value.toLowerCase().trim();
 
-  const filtered = products.filter(p => {
+  const filtered = products.filter(product => {
 
     const categoryMatch =
-      activeCategory === "all" || p[0] === activeCategory;
+      selectedCategory === "all" ||
+      product[0] === selectedCategory;
 
     const searchMatch =
-      p.join(" ").toLowerCase().includes(query);
+      product.join(" ").toLowerCase().includes(query);
 
     return categoryMatch && searchMatch;
 
@@ -575,55 +820,76 @@ function renderProducts() {
 
   table.innerHTML = "";
 
-  let lastCategory = "";
+  let currentCategory = "";
 
-  filtered.forEach(p => {
+  filtered.forEach((product,index) => {
 
-    if (activeCategory === "all" && lastCategory !== p[0]) {
+    const [
+      category,
+      name,
+      uc,
+      buy,
+      sell,
+      discount
+    ] = product;
 
-      lastCategory = p[0];
+    if (
+      selectedCategory === "all" &&
+      category !== currentCategory
+    ) {
+
+      currentCategory = category;
 
       const heading = document.createElement("tr");
       heading.className = "category-row";
 
-      const cell = document.createElement("td");
-      cell.colSpan = 5;
-      cell.textContent = "◈ " + p[0].toUpperCase();
+      const headingCell = document.createElement("td");
 
-      heading.appendChild(cell);
+      headingCell.colSpan = 5;
+      headingCell.textContent = "◈ " + category.toUpperCase();
+
+      heading.appendChild(headingCell);
       table.appendChild(heading);
 
     }
 
     const row = document.createElement("tr");
 
-    p.slice(1).forEach(value => {
+    [name,uc,buy,sell,discount].forEach(value => {
 
       const cell = document.createElement("td");
+
       cell.textContent = value;
+
       row.appendChild(cell);
 
     });
+
+    row.style.animationDelay =
+      Math.min(index * 12,250) + "ms";
 
     table.appendChild(row);
 
   });
 
-  empty.style.display = filtered.length ? "none" : "block";
+  emptyMessage.style.display =
+    filtered.length === 0 ? "block" : "none";
 
 }
+
+/* CATEGORY BUTTONS */
 
 document.querySelectorAll(".filter-btn").forEach(button => {
 
   button.addEventListener("click", () => {
 
-    document.querySelectorAll(".filter-btn").forEach(b =>
-      b.classList.remove("active")
-    );
+    document.querySelectorAll(".filter-btn").forEach(btn => {
+      btn.classList.remove("active");
+    });
 
     button.classList.add("active");
 
-    activeCategory = button.dataset.category;
+    selectedCategory = button.dataset.category;
 
     renderProducts();
 
@@ -631,82 +897,126 @@ document.querySelectorAll(".filter-btn").forEach(button => {
 
 });
 
-search.addEventListener("input", renderProducts);
+/* SEARCH */
+
+searchInput.addEventListener("input",renderProducts);
+
+/* INITIAL TABLE */
 
 renderProducts();
 
-/* PARTICLE ANIMATION */
+/* ====================================
+   CYBERPUNK PARTICLE EFFECT
+==================================== */
 
 const canvas = document.getElementById("particles");
 const ctx = canvas.getContext("2d");
 
 let particles = [];
-let w, h;
+let width,height;
+let animationFrame;
 
-function resize() {
+const reduceMotion = window.matchMedia(
+  "(prefers-reduced-motion: reduce)"
+).matches;
 
-  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+function resizeCanvas() {
 
-  w = window.innerWidth;
-  h = window.innerHeight;
+  const dpr = Math.min(window.devicePixelRatio || 1,2);
 
-  canvas.width = w * dpr;
-  canvas.height = h * dpr;
+  width = window.innerWidth;
+  height = window.innerHeight;
 
-  canvas.style.width = w + "px";
-  canvas.style.height = h + "px";
+  canvas.width = width * dpr;
+  canvas.height = height * dpr;
 
-  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  canvas.style.width = width + "px";
+  canvas.style.height = height + "px";
 
-  particles = Array.from(
-    {length: Math.min(80, Math.floor(w / 12))},
-    () => ({
-      x: Math.random() * w,
-      y: Math.random() * h,
-      dx: (Math.random() - .5) * .5,
-      dy: (Math.random() - .5) * .5,
-      r: Math.random() * 2 + .5
-    })
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+
+  const count = Math.min(
+    Math.floor(width / 12),
+    90
   );
+
+  particles = Array.from({length:count},() => ({
+
+    x: Math.random() * width,
+    y: Math.random() * height,
+
+    radius: Math.random() * 2 + .5,
+
+    speedX: (Math.random() - .5) * .5,
+    speedY: (Math.random() - .5) * .5,
+
+    opacity: Math.random() * .6 + .2
+
+  }));
 
 }
 
-function animate() {
+function drawParticles() {
 
-  ctx.clearRect(0, 0, w, h);
+  ctx.clearRect(0,0,width,height);
 
-  particles.forEach((p, i) => {
+  particles.forEach((particle,index) => {
 
-    p.x += p.dx;
-    p.y += p.dy;
+    particle.x += particle.speedX;
+    particle.y += particle.speedY;
 
-    if (p.x < 0 || p.x > w) p.dx *= -1;
-    if (p.y < 0 || p.y > h) p.dy *= -1;
+    if (particle.x < 0 || particle.x > width)
+      particle.speedX *= -1;
+
+    if (particle.y < 0 || particle.y > height)
+      particle.speedY *= -1;
 
     ctx.beginPath();
-    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-    ctx.fillStyle = "#39ff75";
+
+    ctx.arc(
+      particle.x,
+      particle.y,
+      particle.radius,
+      0,
+      Math.PI * 2
+    );
+
+    ctx.fillStyle =
+      `rgba(57,255,117,${particle.opacity})`;
+
     ctx.shadowBlur = 10;
     ctx.shadowColor = "#39ff75";
+
     ctx.fill();
+
     ctx.shadowBlur = 0;
 
-    for (let j = i + 1; j < particles.length; j++) {
+    /* CONNECT PARTICLES */
 
-      const q = particles[j];
+    for (
+      let j = index + 1;
+      j < particles.length;
+      j++
+    ) {
 
-      const dx = p.x - q.x;
-      const dy = p.y - q.y;
-      const distance = Math.sqrt(dx * dx + dy * dy);
+      const other = particles[j];
+
+      const dx = particle.x - other.x;
+      const dy = particle.y - other.y;
+
+      const distance = Math.sqrt(dx*dx + dy*dy);
 
       if (distance < 100) {
 
         ctx.beginPath();
-        ctx.moveTo(p.x, p.y);
-        ctx.lineTo(q.x, q.y);
+
+        ctx.moveTo(particle.x,particle.y);
+        ctx.lineTo(other.x,other.y);
 
         ctx.strokeStyle =
-          `rgba(57,255,117,${.12 * (1-distance/100)})`;
+          `rgba(57,255,117,${.12*(1-distance/100)})`;
+
+        ctx.lineWidth = .7;
 
         ctx.stroke();
 
@@ -716,18 +1026,22 @@ function animate() {
 
   });
 
-  if (!window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-  ).matches) {
-    requestAnimationFrame(animate);
+}
+
+function animateParticles() {
+
+  drawParticles();
+
+  if (!reduceMotion) {
+    animationFrame = requestAnimationFrame(animateParticles);
   }
 
 }
 
-window.addEventListener("resize", resize);
+window.addEventListener("resize",resizeCanvas);
 
-resize();
-animate();
+resizeCanvas();
+animateParticles();
 
 </script>
 
